@@ -1,22 +1,24 @@
 package main;
 
+import main.messages.*;
 import main.services.ClientServerUpload;
-import main.services.Login;
-import main.services.Register;
+import main.services.LoginService;
+import main.services.RegistrationService;
 import services.ClientServerDownload;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Date;
 
 public class RequestHandler extends Thread {
-    private final Login login;
-    private final Register register;
+    private final LoginService loginService;
+    private final RegistrationService registrationService;
     private final ClientServerUpload clientServerUpload;
     private final ClientServerDownload clientServerDownload;
 
-    public RequestHandler(Login login, Register register, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload) {
-        this.login = login;
-        this.register = register;
+    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload) {
+        this.loginService = loginService;
+        this.registrationService = registrationService;
         this.clientServerUpload = clientServerUpload;
         this.clientServerDownload = clientServerDownload;
     }
@@ -31,33 +33,31 @@ public class RequestHandler extends Thread {
     @Override
     public void run() {
         try {
-            boolean running = true;
-            while (running) {
-                switch (client.receive()) {
-                    case "LOGIN":
-                        login.execute(client);
-                        break;
-                    case "REGISTER":
-                        register.execute(client);
-                        break;
-                    case "CLIENT_SERVER_UPLOAD":
-                        clientServerUpload.execute(client);
-                        break;
-                    case "CLIENT_SERVER_DOWNLOAD":
-                        clientServerDownload.execute(client);
-                        break;
-                    case "EXIT":
-                        client.send("EXIT");
-                        running = false;
-                        break;
-                    default:
-                        client.send("ERROR");
-                        client.send("unrecongnized command");
-                        running = false;
-                        break;
+            while (true) {
+                Message request = client.readMessage();
+                Message response;
+
+                if (request instanceof LoginRequest)
+                    response = loginService.execute((LoginRequest) request);
+
+                else if (request instanceof RegistrationRequest)
+                    response = registrationService.execute((RegistrationRequest) request);
+
+                else if (request instanceof ExitRequest)
+                    response = new ExitResponse();
+
+                else {
+                    response = new ExitResponse();
+                    response.error = "unknown request";
                 }
+
+                response.date = new Date().toString();
+                client.sendMessage(response);
+
+                if (response instanceof ExitResponse)
+                    break;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             client.close();

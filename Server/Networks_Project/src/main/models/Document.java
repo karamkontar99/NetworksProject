@@ -1,16 +1,14 @@
 package main.models;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
 
 public class Document {
 
     private UUID id;
     private String name;
-    private byte[] content;
+    private int size;
     private List<UUID> users;
 
     public Document() {
@@ -18,10 +16,10 @@ public class Document {
         users = new ArrayList<>();
     }
 
-    public Document(String name, byte[] content) {
+    public Document(String name, int size) {
         id = UUID.randomUUID();
         this.name = name;
-        this.content = content;
+        this.size = size;
         users = new ArrayList<>();
     }
 
@@ -37,12 +35,12 @@ public class Document {
         this.name = name;
     }
 
-    public byte[] getContent() {
-        return content;
+    public int getSize() {
+        return size;
     }
 
-    public void setContent(byte[] content) {
-        this.content = content;
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public List<UUID> getUsers() {
@@ -66,7 +64,7 @@ public class Document {
         return "Document{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", content='" + Arrays.toString(content) + '\'' +
+                ", size=" + size +
                 ", users=" + users +
                 '}';
     }

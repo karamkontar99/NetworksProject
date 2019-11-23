@@ -15,7 +15,6 @@ public class DBConfig {
 
     public DBConfig() {
         this.database = configureDatabase();
-        System.out.println("DB CREATED");
     }
 
     public MongoDatabase getDatabase() {

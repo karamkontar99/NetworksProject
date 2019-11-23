@@ -6,7 +6,6 @@ import main.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class UserRepository implements Repository<User> {
@@ -20,7 +19,7 @@ public class UserRepository implements Repository<User> {
         userCollection.insertOne(user);
     }
 
-    public void delete(UUID userId) {
+    public void delete(String userId) {
         userCollection.deleteOne(Filters.eq("_id", userId));
     }
 
@@ -34,11 +33,11 @@ public class UserRepository implements Repository<User> {
         return users;
     }
 
-    public User find(UUID userId) {
+    public User find(String userId) {
         return userCollection.find(Filters.eq("_id", userId)).first();
     }
 
-    public List<User> findAllOfDocument(UUID documentId) {
+    public List<User> findAllOfDocument(String documentId) {
         final List<User> users = new ArrayList<>();
         userCollection.find(Filters.eq("documents", documentId)).forEach((Consumer<? super User>) users::add);
         return users;

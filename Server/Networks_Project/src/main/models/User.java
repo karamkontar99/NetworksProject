@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class User {
-    private UUID id;
+    private String id;
     private String name;
     private String address;
     private String email;
@@ -14,12 +14,12 @@ public class User {
     private List<UUID> documents;
 
     public User() {
-        id = UUID.randomUUID();
+        id = UUID.randomUUID().toString();
         documents = new ArrayList<>();
     }
 
     public User(String name, String address, String email, String username, String password) {
-        id = UUID.randomUUID();
+        id = UUID.randomUUID().toString();
         this.name = name;
         this.address = address;
         this.email = email;
@@ -28,7 +28,7 @@ public class User {
         documents = new ArrayList<>();
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

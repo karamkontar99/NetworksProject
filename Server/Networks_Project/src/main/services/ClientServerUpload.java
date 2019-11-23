@@ -1,10 +1,11 @@
 package main.services;
 
-import main.Client;
+import main.messages.Message;
 
 public class ClientServerUpload implements Service {
-    @Override
-    public void execute(Client client) {
 
+    @Override
+    public Message execute(Message message) {
+        return null;
     }
 }

@@ -6,7 +6,6 @@ import main.models.Document;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Consumer;
 
 public class DocumentRepository implements Repository<Document> {
@@ -20,7 +19,7 @@ public class DocumentRepository implements Repository<Document> {
         documentCollection.insertOne(document);
     }
 
-    public void delete(UUID documentId) {
+    public void delete(String documentId) {
         documentCollection.deleteOne(Filters.eq("_id", documentId));
     }
 
@@ -34,11 +33,11 @@ public class DocumentRepository implements Repository<Document> {
         return documents;
     }
 
-    public Document find(UUID documentId) {
+    public Document find(String documentId) {
         return documentCollection.find(Filters.eq("_id", documentId)).first();
     }
 
-    public List<Document> findAllOfUser(UUID userId) {
+    public List<Document> findAllOfUser(String userId) {
         final List<Document> documents = new ArrayList<>();
         documentCollection.find(Filters.eq("users", userId)).forEach((Consumer<? super Document>) documents::add);
         return documents;

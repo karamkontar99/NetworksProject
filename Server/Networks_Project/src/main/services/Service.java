@@ -1,10 +1,8 @@
 package main.services;
 
-import main.Client;
+import main.messages.Message;
 
-import java.io.IOException;
+public interface Service <Request extends Message, Response extends Message> {
 
-public interface Service {
-
-    void execute(Client client) throws IOException;
+     Response execute(Request message);
 }
