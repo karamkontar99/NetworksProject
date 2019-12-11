@@ -21,7 +21,7 @@ public class RegistrationService implements Service<RegistrationRequest, Registr
 
         if (!userRepository.uniqueUsername(request.username)) {
             response = new RegistrationResponse();
-            response.error = "username taken";
+            //response.error = "username taken";
         }
         else {
             User user = mapper.map(request, User.class);

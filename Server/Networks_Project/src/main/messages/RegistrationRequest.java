@@ -100,5 +100,4 @@ public class RegistrationRequest implements MessageInterface {
 
         return bytes;
     }
-
 }
