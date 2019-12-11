@@ -13,7 +13,7 @@ public class MyApplication extends Application {
     private ApplicationComponent applicationComponent;
     private ServerSocket serverSocket;
 
-    private static String hostIp;
+    private static String hostIp = "10.0.2.2";
 
     @Override
     public void onCreate() {

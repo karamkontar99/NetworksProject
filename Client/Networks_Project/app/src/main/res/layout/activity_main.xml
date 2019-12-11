@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:onClick="clientServer"
         android:text="Client Server" />
 
     <Button
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:onClick="peerToPeer"
         android:text="Peer to Peer" />
 
     <Button
@@ -27,5 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
+        android:onClick="localFiles"
         android:text="Local Files" />
 </LinearLayout>

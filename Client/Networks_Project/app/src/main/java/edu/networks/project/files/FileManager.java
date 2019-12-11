@@ -1,62 +1,71 @@
 package edu.networks.project.files;
 
+import android.content.Context;
+
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-
-import javax.inject.Inject;
 
 public class FileManager {
-    private final String FILE_DIR = "Network_Project_File_Directory";
+    private final String DIR_NAME = "Networks_Project";
     private File dir;
 
-    @Inject
-    public FileManager() {
-        dir = new File(FILE_DIR);
+    public FileManager(Context context) {
+        dir = new File(context.getFilesDir(), DIR_NAME);
         assert dir.exists() || dir.mkdir();
     }
 
     public boolean hasFile(String name) {
-        return Arrays.asList(Objects.requireNonNull(dir.list())).contains(name);
+        return getFile(name).exists();
     }
 
-    public void createFile(String name) throws IOException {
-        File file = new File(getPath(name));
-        assert file.createNewFile();
+    public File getFile(String name) {
+        return new File(dir, name);
     }
 
-    public File getFile(String name) throws FileNotFoundException {
-        File file = new File(getPath(name));
-        if (!file.exists())
-            throw new FileNotFoundException();
-        return file;
+    public List<File> getAllFiles() {
+        File[] files = dir.listFiles();
+        if (files == null)
+            files = new File[0];
+        return Arrays.asList(files);
     }
 
-    private String getPath(String name) {
-        return FILE_DIR + File.separator + name;
+    public void addFile(String name, File file) throws IOException {
+        FileUtils.copyFile(file, getFile(name));
     }
 
-    public List<byte[]> readFile(String filename) throws IOException {
-        FileInputStream stream = new FileInputStream(new File(filename));
+    public void removeFile(String name) {
+        File file = getFile(name);
+        assert !file.exists() || file.delete();
+    }
+
+    public void renameFile(String oldName, String newName) throws IOException {
+        FileUtils.moveFile(getFile(oldName), getFile(newName));
+    }
+
+    public List<byte[]> readFile(String name) throws IOException {
+        FileInputStream stream = new FileInputStream(getFile(name));
         ArrayList<byte[]> list = new ArrayList<>();
         byte[] bytes = new byte[4096];
         while (stream.read(bytes) > 0) {
             list.add(bytes);
         }
+        stream.close();
         return list;
     }
 
-    public void writeFile(String filename, int filesize, List<byte[]> list) throws IOException {
-        FileOutputStream stream = new FileOutputStream(new File(filename));
+    public void writeFile(String name, int size, List<byte[]> list) throws IOException {
+        FileOutputStream stream = new FileOutputStream(getFile(name));
         for (byte[] bytes : list) {
-            stream.write(bytes, 0, Math.min(bytes.length, filesize));
-            filesize -= bytes.length;
+            stream.write(bytes, 0, Math.min(bytes.length, size));
+            size -= bytes.length;
         }
+        stream.close();
     }
 }

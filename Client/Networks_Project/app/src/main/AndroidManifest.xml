@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -14,17 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LocalFilesActivity"
-            android:label="@string/title_activity_local_files"
+            android:name=".activities.PeerToPeerActivity"
+            android:label="@string/title_activity_peer_to_peer"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activities.MainActivity" />
-        <activity android:name=".activities.RegistrationActivity" />
-        <activity android:name=".activities.LoginActivity">
+        <activity
+            android:name=".activities.ClientServerActivity"
+            android:label="@string/title_activity_client_server"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.LocalFilesActivity"
+            android:label="@string/title_activity_local_files"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activities.RegistrationActivity" />
+        <activity android:name=".activities.LoginActivity">
+
         </activity>
     </application>
 
