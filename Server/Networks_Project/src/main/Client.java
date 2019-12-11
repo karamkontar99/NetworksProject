@@ -4,6 +4,7 @@ import main.messages.Message;
 
 import java.io.*;
 import java.lang.reflect.Field;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Arrays;
 import java.util.Optional;
@@ -12,6 +13,8 @@ public class Client {
     private final Socket clientSocket;
     private final BufferedReader reader;
     private final BufferedWriter writer;
+    private final InetAddress ip;
+    private final int port;
 
     public Client(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
@@ -19,6 +22,8 @@ public class Client {
         OutputStream outputStream = clientSocket.getOutputStream();
         reader = new BufferedReader(new InputStreamReader(inputStream));
         writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+        ip = clientSocket.getInetAddress();
+        port = clientSocket.getPort();
     }
 
     public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -52,5 +57,13 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public InetAddress getIp() {
+        return ip;
+    }
+
+    public int getPort() {
+        return port;
     }
 }

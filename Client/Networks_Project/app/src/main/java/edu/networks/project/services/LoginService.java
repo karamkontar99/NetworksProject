@@ -18,6 +18,14 @@ public class LoginService implements Service<LoginRequest, LoginResponse> {
 
     @Override
     public LoginResponse execute(LoginRequest request) {
-        return null;
+        LoginResponse response;
+        try {
+            mySocket.sendMessage(request);
+            response = (LoginResponse) mySocket.readMessage();
+        } catch (Exception e) {
+            response = new LoginResponse();
+            response.error = "failed to send or receive message";
+        }
+        return response;
     }
 }

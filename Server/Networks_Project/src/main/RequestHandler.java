@@ -33,7 +33,6 @@ public class RequestHandler extends Thread {
     @Override
     public void run() {
         try {
-            while (true) {
                 Message request = client.readMessage();
                 Message response;
 
@@ -54,9 +53,6 @@ public class RequestHandler extends Thread {
                 response.date = new Date().toString();
                 client.sendMessage(response);
 
-                if (response instanceof ExitResponse)
-                    break;
-            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

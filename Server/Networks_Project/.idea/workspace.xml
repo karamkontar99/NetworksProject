@@ -2,36 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6b92d1e-afc5-4e22-aecc-50865a600d2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/files/FileManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/services/LoginService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/services/RegistrationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/files/FileManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/P2PDownloadRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/P2PDownloadResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/services/LogoutService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/RegistrationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/RegistrationActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationModule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/RegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/RegistrationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/messages/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/messages/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/messages/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/messages/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/models/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/models/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/repos/DBConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/repos/DBConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/repos/DocumentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/repos/DocumentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/repos/Repository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/repos/Repository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/repos/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/repos/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/Register.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/Service.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Client.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/models/Document.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/models/Document.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/DBConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/DBConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Login.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/Login.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/models/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/DocumentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/DocumentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/Repository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/services/ClientServerUpload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/ClientServerUpload.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Login.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Register.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/Service.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/services/ClientServerDownload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/ClientServerDownload.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +66,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1Tf8xBrafCfA1Zk8ZI9mK4U9c9E" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -97,7 +103,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Networks_Project" />
@@ -133,6 +152,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
@@ -163,27 +183,4 @@
       <workItem from="1574162165955" duration="487000" />
       <workItem from="1574162910645" duration="1671000" />
       <workItem from="1574356572573" duration="8918000" />
-      <workItem from="1574420593320" duration="8000" />
-      <workItem from="1574506524157" duration="1896000" />
-      <workItem from="1574514618212" duration="543000" />
-      <workItem from="1574527284653" duration="600000" />
-    </task>
-    <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-</project>
+      <workItem 

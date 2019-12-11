@@ -16,7 +16,15 @@ public class RegistrationService implements Service<RegistrationRequest, Registr
 
 
     @Override
-    public RegistrationResponse execute(RegistrationRequest message) {
-        return null;
+    public RegistrationResponse execute(RegistrationRequest request) {
+        RegistrationResponse response;
+        try {
+            mySocket.sendMessage(request);
+            response = (RegistrationResponse) mySocket.readMessage();
+        } catch (Exception e) {
+            response = new RegistrationResponse();
+            response.error = "failed to send or receive message";
+        }
+        return response;
     }
 }

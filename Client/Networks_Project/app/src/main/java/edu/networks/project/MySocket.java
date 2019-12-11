@@ -12,19 +12,28 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.Optional;
 
-import javax.inject.Singleton;
-
 import edu.networks.project.messages.Message;
 
-@Singleton
-public class MySocket {
 
+public class MySocket {
     private final Socket clientSocket;
     private final BufferedReader reader;
     private final BufferedWriter writer;
 
-    public MySocket(String host, int port) throws IOException {
-        this.clientSocket = new Socket(host, port);
+    public MySocket(Socket clientSocket) throws IOException {
+        this.clientSocket = clientSocket;
+        InputStream inputStream = clientSocket.getInputStream();
+        OutputStream outputStream = clientSocket.getOutputStream();
+        reader = new BufferedReader(new InputStreamReader(inputStream));
+        writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+    }
+
+    public MySocket() throws IOException {
+        this("10.0.2.2");
+    }
+
+    public MySocket(String host) throws IOException {
+        this.clientSocket = new Socket(host, 5050);
         InputStream inputStream = clientSocket.getInputStream();
         OutputStream outputStream = clientSocket.getOutputStream();
         reader = new BufferedReader(new InputStreamReader(inputStream));

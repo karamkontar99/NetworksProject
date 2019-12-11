@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             for (AutoCompleteTextView field : allFields)
                 field.setEnabled(true);
-            if (response.error == null) {
+            if (response.error != null) {
                 new AlertDialog
                         .Builder(getApplicationContext())
                         .setTitle("Error")
