@@ -15,10 +15,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.FirstActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.PeerToPeerActivity"
             android:label="@string/title_activity_peer_to_peer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ClientServerActivity"
             android:label="@string/title_activity_client_server"
@@ -26,18 +33,10 @@
         <activity
             android:name=".activities.LocalFilesActivity"
             android:label="@string/title_activity_local_files"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.RegistrationActivity" />
-        <activity android:name=".activities.LoginActivity">
-
-        </activity>
+        <activity android:name=".activities.LoginActivity" />
     </application>
 
 </manifest>

@@ -5,15 +5,13 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import javax.inject.Inject;
+import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import edu.networks.project.MyApplication;
 import edu.networks.project.R;
 import edu.networks.project.messages.LoginRequest;
 import edu.networks.project.messages.LoginResponse;
@@ -23,9 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private final String SHARED_PREFERENCES = getClass().getName();
 
-    @Inject
-    LoginService loginService;
-    private AutoCompleteTextView usernameText, passwordText, allFields[];
+    private EditText usernameText, passwordText, allFields[];
     private CheckBox rememberMeCheck;
     private ProgressBar progressBar;
 
@@ -33,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ((MyApplication) getApplicationContext()).getApplicationComponent().inject(this);
         linkUI();
         loadFields();
     }
@@ -73,14 +68,14 @@ public class LoginActivity extends AppCompatActivity {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
             progressBar.requestFocus();
-            for (AutoCompleteTextView field : allFields)
+            for (EditText field : allFields)
                 field.setEnabled(true);
         }
 
         @Override
         protected LoginResponse doInBackground(LoginRequest... requests) {
             LoginRequest request = requests[0];
-            LoginResponse response = loginService.execute(request);
+            LoginResponse response = LoginService.execute(request);
             return response;
         }
 
@@ -88,15 +83,10 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(LoginResponse response) {
             super.onPostExecute(response);
             progressBar.setVisibility(View.GONE);
-            for (AutoCompleteTextView field : allFields)
+            for (EditText field : allFields)
                 field.setEnabled(true);
-            if (response.error != null) {
-                new AlertDialog
-                        .Builder(getApplicationContext())
-                        .setTitle("Error")
-                        .setMessage(response.error)
-                        .setPositiveButton("OK", null)
-                        .show();
+            if (response.status == 0) {
+                Snackbar.make(progressBar, "an error occurred", Snackbar.LENGTH_LONG).show();
             }
             else {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -113,21 +103,18 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean validateFields() {
-        boolean valid = true;
-        for (AutoCompleteTextView field : allFields) {
+        for (EditText field : allFields)
             if (field.getText().toString().isEmpty()) {
                 field.setError("field cannot be empty");
-                valid = false;
-            } else
-                field.setError("");
-        }
-        return valid;
+                return false;
+            }
+        return true;
     }
 
     private void linkUI() {
         usernameText = findViewById(R.id.txt_username);
         passwordText = findViewById(R.id.txt_password);
-        allFields = new AutoCompleteTextView[]{usernameText, passwordText};
+        allFields = new EditText[]{usernameText, passwordText};
         rememberMeCheck = findViewById(R.id.check_rememberMe);
         progressBar = findViewById(R.id.progressBar);
     }

@@ -1,37 +1,26 @@
 package edu.networks.project.services;
 
-import java.io.IOException;
+import android.util.Log;
 
-import javax.inject.Inject;
-
-import edu.networks.project.MyApplication;
 import edu.networks.project.MySocket;
 import edu.networks.project.messages.LoginRequest;
 import edu.networks.project.messages.LoginResponse;
 
-public class LoginService implements Service<LoginRequest, LoginResponse> {
+public class LoginService {
 
-    private MySocket mySocket;
-
-    @Inject
-    public LoginService() {
+    public static LoginResponse execute(LoginRequest request) {
+        LoginResponse response = new LoginResponse();
         try {
-            mySocket = MyApplication.getSocketToServer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Override
-    public LoginResponse execute(LoginRequest request) {
-        LoginResponse response;
-        try {
-            mySocket.sendMessage(request);
-            response = (LoginResponse) mySocket.readMessage();
+            MySocket socket = new MySocket();
+            Log.e("SOCKETS", "socket created");
+            socket.sendMessage(request);
+            Log.e("SOCKETS", "request sent");
+            response = (LoginResponse) socket.readMessage();
+            Log.e("SOCKETS", "response received");
+            return response;
         } catch (Exception e) {
-            response = new LoginResponse();
-            response.error = "failed to send or receive message";
+            response.status = 0;
+            e.printStackTrace();
         }
         return response;
     }

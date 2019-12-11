@@ -3,14 +3,12 @@ package edu.networks.project.activities;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import javax.inject.Inject;
+import com.google.android.material.snackbar.Snackbar;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import edu.networks.project.MyApplication;
 import edu.networks.project.R;
 import edu.networks.project.messages.RegistrationRequest;
 import edu.networks.project.messages.RegistrationResponse;
@@ -18,16 +16,13 @@ import edu.networks.project.services.RegistrationService;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    @Inject
-    RegistrationService registrationService;
-    private AutoCompleteTextView nameText, addressText, emailText, usernameText, passwordText, allFields[];
+    private EditText nameText, addressText, emailText, usernameText, passwordText, allFields[];
     private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        ((MyApplication) getApplicationContext()).getApplicationComponent().inject(this);
         linkUI();
     }
 
@@ -43,14 +38,14 @@ public class RegistrationActivity extends AppCompatActivity {
             super.onPreExecute();
             progressBar.setVisibility(View.VISIBLE);
             progressBar.requestFocus();
-            for (AutoCompleteTextView field : allFields)
+            for (EditText field : allFields)
                 field.setEnabled(true);
         }
 
         @Override
         protected RegistrationResponse doInBackground(RegistrationRequest... requests) {
             RegistrationRequest request = requests[0];
-            RegistrationResponse response = registrationService.execute(request);
+            RegistrationResponse response = RegistrationService.execute(request);
             return response;
         }
 
@@ -58,15 +53,10 @@ public class RegistrationActivity extends AppCompatActivity {
         protected void onPostExecute(RegistrationResponse response) {
             super.onPostExecute(response);
             progressBar.setVisibility(View.GONE);
-            for (AutoCompleteTextView field : allFields)
+            for (EditText field : allFields)
                 field.setEnabled(true);
-            if (response.error != null) {
-                new AlertDialog
-                        .Builder(getApplicationContext())
-                        .setTitle("Error")
-                        .setMessage(response.error)
-                        .setPositiveButton("OK", null)
-                        .show();
+            if (response.status == 0) {
+                Snackbar.make(progressBar, "an error occurred", Snackbar.LENGTH_LONG).show();
             }
             else {
                 setResult(RESULT_OK);
@@ -86,15 +76,12 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private boolean validateFields() {
-        boolean valid = true;
-        for (AutoCompleteTextView field : allFields) {
+        for (EditText field : allFields)
             if (field.getText().toString().isEmpty()) {
                 field.setError("field cannot be empty");
-                valid = false;
-            } else
-                field.setError("");
-        }
-        return valid;
+                return false;
+            }
+        return true;
     }
 
     private void linkUI() {
@@ -103,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
         emailText = findViewById(R.id.txt_email);
         usernameText = findViewById(R.id.txt_username);
         passwordText = findViewById(R.id.txt_password);
-        allFields = new AutoCompleteTextView[]{nameText, addressText, emailText, usernameText, passwordText};
+        allFields = new EditText[]{nameText, addressText, emailText, usernameText, passwordText};
         progressBar = findViewById(R.id.progressBar);
     }
 }

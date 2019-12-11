@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Networks_Project</string>
+    <string name="app_name">Networks Project</string>
     <string name="title_activity_local_files">LocalFilesActivity</string>
     <string name="title_activity_client_server">ClientServerActivity</string>
     <string name="title_activity_peer_to_peer">PeerToPeerActivity</string>

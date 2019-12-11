@@ -1,19 +1,12 @@
 package edu.networks.project.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,191 +15,145 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import edu.networks.project.DocumentAdapter;
 import edu.networks.project.R;
-import edu.networks.project.files.FileManager;
+import edu.networks.project.models.Document;
 
 public class ClientServerActivity extends AppCompatActivity {
 
-    private final int CHOOSE_FILE_REQUEST_CODE = 100;
-
-    private List<File> mAllFiles, mFiles;
-    private FilesAdapter mAdapter;
-    private SearchView mSearchView;
+    private List<Document> documents = new ArrayList<>();
+    private DocumentAdapter adapter;
+    private SearchView searchView;
+    private ProgressBar progressBar;
     
-    private FileManager fileManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_server);
-        fileManager = new FileManager(this);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mAllFiles = fileManager.getAllFiles();
-
+        progressBar = findViewById(R.id.progressBar);
         RecyclerView recyclerView = findViewById(R.id.recycleview);
-        mSearchView = findViewById(R.id.searchView);
-
-        mAdapter = new FilesAdapter();
+        searchView = findViewById(R.id.searchView);
+        adapter = new DocumentAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(adapter);
 
         setupSearchView();
+
+        setupAdapter();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("*/*");
-            startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
+//            startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
         });
+
+//        new PopulateList().execute();
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CHOOSE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
-            String filePath = data.getDataString();
-            File file = new File(filePath);
+//    private class PopulateList extends AsyncTask<Void, Void, List<Document>> {
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            progressBar.setVisibility(View.VISIBLE);
+//            progressBar.requestFocus();
+//        }
+//
+//        @Override
+//        protected LoginResponse doInBackground(Void... voids) {
+//            LoginRequest request = requests[0];
+//            LoginResponse response = LoginService.execute(request);
+//            return response;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(LoginResponse response) {
+//            super.onPostExecute(response);
+//            progressBar.setVisibility(View.GONE);
+//            for (AutoCompleteTextView field : allFields)
+//                field.setEnabled(true);
+//            if (response.status == 0) {
+//                Snackbar.make(progressBar, "an error occurred", Snackbar.LENGTH_LONG).show();
+//            }
+//            else {
+//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        }
+//    }
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Choose file name");
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == CHOOSE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
+//            String filePath = data.getDataString();
+//            File file = new File(filePath);
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setTitle("Choose file name");
+//
+//            final EditText input = new EditText(builder.getContext());
+//            input.setInputType(InputType.TYPE_CLASS_TEXT);
+//            input.setText(file.getName());
+//            builder.setView(input);
+//
+//            builder.setPositiveButton("OK", (dialog, i) -> {
+//                String fileName = input.getText().toString();
+//                if (!file.getName().equals(fileName)) {
+//                    if (fileName.isEmpty()) {
+//                        input.setError("cannot be empty");
+//                        return;
+//                    }
+//                    if (fileManager.hasFile(fileName)) {
+//                        input.setError("file name already exists");
+//                        return;
+//                    }
+//                    try {
+//                        fileManager.addFile(fileName, file);
+//                        mAllFiles.add(0, fileManager.getFile(fileName));
+//                        mSearchView.setQuery("", true);
+//                    } catch (Exception e) {
+//                        Snackbar.make(mSearchView, "an error occurred", Snackbar.LENGTH_SHORT).show();
+//                    }
+//                }
+//                dialog.dismiss();
+//            });
+//
+//            builder.setNegativeButton("Cancel", (dialog, i) -> {
+//                dialog.dismiss();
+//            });
+//
+//            builder.show();
+//        }
+//    }
 
-            final EditText input = new EditText(builder.getContext());
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            input.setText(file.getName());
-            builder.setView(input);
 
-            builder.setPositiveButton("OK", (dialog, i) -> {
-                String fileName = input.getText().toString();
-                if (!file.getName().equals(fileName)) {
-                    if (fileName.isEmpty()) {
-                        input.setError("cannot be empty");
-                        return;
-                    }
-                    if (fileManager.hasFile(fileName)) {
-                        input.setError("file name already exists");
-                        return;
-                    }
-                    try {
-                        fileManager.addFile(fileName, file);
-                        mAllFiles.add(0, fileManager.getFile(fileName));
-                        mSearchView.setQuery("", true);
-                    } catch (Exception e) {
-                        Snackbar.make(mSearchView, "an error occurred", Snackbar.LENGTH_SHORT).show();
-                    }
-                }
-                dialog.dismiss();
-            });
+    private void setupAdapter() {
+        adapter.setOnDocumentClickListener(((document, index) -> {
 
-            builder.setNegativeButton("Cancel", (dialog, i) -> {
-                dialog.dismiss();
-            });
-
-            builder.show();
-        }
+        }));
     }
+
 
     private void setupSearchView(){
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                List<Document> filteredDocuments = documents.stream().filter(file -> query.isEmpty() || file.getName().toLowerCase().equals(query.toLowerCase())).collect(Collectors.toList());
+                adapter.setDocuments(filteredDocuments);
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
-                mFiles = mAllFiles.stream().filter(file -> query.isEmpty() || file.getName().toLowerCase().equals(query.toLowerCase())).collect(Collectors.toList());
-                mAdapter.notifyDataSetChanged();
+                List<Document> filteredDocuments = documents.stream().filter(file -> query.isEmpty() || file.getName().toLowerCase().equals(query.toLowerCase())).collect(Collectors.toList());
+                adapter.setDocuments(filteredDocuments);
                 return true;
             }
         });
-
-        mSearchView.setQuery("", true);
-    }
-
-
-    private class FileViewHolder extends RecyclerView.ViewHolder {
-        private TextView mFileName, mFilePath;
-
-        public FileViewHolder(ViewGroup parent) {
-            super(LayoutInflater.from(ClientServerActivity.this).inflate(R.layout.file_list_item, parent, false));
-            mFileName = itemView.findViewById(R.id.textView_file_name);
-            mFilePath = itemView.findViewById(R.id.textView_file_path);
-        }
-
-        public void bind(File file) {
-            mFileName.setText(file.getName());
-            mFilePath.setText(file.getAbsolutePath());
-
-            itemView.setOnLongClickListener(view -> {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.fromFile(file));
-                Intent chooserIntent = Intent.createChooser(intent, "Choose an application to open");
-                startActivity(chooserIntent);
-                return true;
-            });
-
-            itemView.setOnClickListener(view -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ClientServerActivity.this);
-                builder.setTitle("Choose an action");
-                builder.setMessage("What do you want to do with file");
-
-                final EditText input = new EditText(builder.getContext());
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                input.setText(file.getName());
-                builder.setView(input);
-
-                builder.setPositiveButton("OK", (dialog, i) -> {
-                    String fileName = input.getText().toString();
-                    if (!file.getName().equals(fileName)) {
-                        if (fileName.isEmpty()) {
-                            input.setError("cannot be empty");
-                            return;
-                        }
-                        if (fileManager.hasFile(fileName)) {
-                            input.setError("file name already exists");
-                            return;
-                        }
-                        try {
-                            fileManager.renameFile(file.getName(), fileName);
-                            mAllFiles.set(mAllFiles.indexOf(file), fileManager.getFile(fileName));
-                            mSearchView.setQuery("", true);
-                        } catch (Exception e) {
-                            Snackbar.make(mSearchView, "an error occurred", Snackbar.LENGTH_SHORT).show();
-                        }
-                    }
-                    dialog.dismiss();
-                });
-
-                builder.setNegativeButton("Delete", (dialog, i) -> {
-                    fileManager.removeFile(file.getName());
-                    mAllFiles.remove(file);
-                    mSearchView.setQuery("", true);
-                    dialog.dismiss();
-                });
-
-                builder.show();
-            });
-        }
-    }
-
-    private class FilesAdapter extends RecyclerView.Adapter<FileViewHolder> {
-
-        @Override
-        public FileViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-            return new FileViewHolder(parent);
-        }
-
-        @Override
-        public void onBindViewHolder(FileViewHolder holder, int i) {
-            holder.bind(mFiles.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return mFiles.size();
-        }
+        searchView.setQuery("", true);
     }
 
 }

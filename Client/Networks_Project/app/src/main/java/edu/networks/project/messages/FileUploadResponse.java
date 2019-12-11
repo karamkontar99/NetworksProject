@@ -3,12 +3,12 @@ package edu.networks.project.messages;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 
-public class RegistrationResponse implements Message {
+public class FileUploadResponse implements Message {
 	public int status;
 
 	@Override
 	public EMsg getEMsg() {
-		return EMsg.ERegistrationResponse;
+		return EMsg.EFileUploadResponse;
 	}
 
 	public void parseFromByteArray(byte[] bytes) throws Exception {
