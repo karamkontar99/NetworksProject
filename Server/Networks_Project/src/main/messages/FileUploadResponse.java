@@ -4,8 +4,13 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileUploadResponse {
+public class FileUploadResponse implements MessageInterface {
 	public int status;
+
+	@Override
+	public EMsg getEMsg() {
+		return EMsg.EFileUploadResponse;
+	}
 
 	public void parseFromByteArray(byte[] bytes) throws Exception {
 		byte[] statusB = Arrays.copyOfRange(bytes, 0, 4);

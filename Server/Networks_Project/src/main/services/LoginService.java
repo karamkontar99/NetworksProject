@@ -20,12 +20,13 @@ public class LoginService implements Service<LoginRequest, LoginResponse> {
 
         User user = userRepository.login(request.username, request.password);
 
+        response = new LoginResponse();
         if (user == null) {
-            response = new LoginResponse();
-            response.error = "invalid credentials";
+            response.status = 0;
         }
         else {
-            response = mapper.map(user, LoginResponse.class);
+//            response = mapper.map(user, LoginResponse.class);
+            response.status = 1;
         }
 
         return response;

@@ -5,12 +5,17 @@ import java.nio.charset.StandardCharsets;
 import java.text.StringCharacterIterator;
 import java.util.Arrays;
 
-public class RegistrationRequest extends Message {
+public class RegistrationRequest implements MessageInterface {
     public String username;
     public String password;
     public String name;
     public String address;
     public String email;
+
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.ERegistrationRequest;
+    }
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
@@ -56,7 +61,6 @@ public class RegistrationRequest extends Message {
         this.name = name;
         this.address = address;
         this.email = email;
-        this.date = date;
     }
 
     public byte[] serializeToByteArray() {

@@ -5,9 +5,14 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class LoginRequest extends Message {
+public class LoginRequest implements MessageInterface {
     public String username;
     public String password;
+
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.ELoginRequest;
+    }
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;

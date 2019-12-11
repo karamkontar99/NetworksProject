@@ -4,11 +4,15 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileUploadRequest {
+public class FileUploadRequest implements MessageInterface {
     public int fileSize;
     public String fileName;
     public byte[] data;
 
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.EFileUploadRequest;
+    }
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
