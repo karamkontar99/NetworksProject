@@ -13,18 +13,27 @@ public class MyApplication extends Application {
     private ApplicationComponent applicationComponent;
     private ServerSocket serverSocket;
 
+    private static String hostIp;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         applicationComponent = DaggerApplicationComponent.create();
-
     }
 
     @Override
     public void onTerminate() {
         super.onTerminate();
 
+    }
+
+    public static String getHostIp() {
+        return hostIp;
+    }
+
+    public static void setHostIp(String _hostIp) {
+        hostIp = _hostIp;
     }
 
     public ApplicationComponent getApplicationComponent() {
@@ -41,4 +50,7 @@ public class MyApplication extends Application {
         return serverSocket;
     }
 
+    public static MySocket getSocketToServer() throws IOException {
+        return new MySocket(hostIp);
+    }
 }

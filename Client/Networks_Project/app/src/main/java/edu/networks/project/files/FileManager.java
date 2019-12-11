@@ -3,10 +3,10 @@ package edu.networks.project.files;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,14 +42,21 @@ public class FileManager {
         return FILE_DIR + File.separator + name;
     }
 
-    public Iterator<byte[]> readFile(String filename) throws IOException {
+    public List<byte[]> readFile(String filename) throws IOException {
         FileInputStream stream = new FileInputStream(new File(filename));
         ArrayList<byte[]> list = new ArrayList<>();
         byte[] bytes = new byte[4096];
-
+        while (stream.read(bytes) > 0) {
+            list.add(bytes);
+        }
+        return list;
     }
 
-    public byte[] writeFile(String filename) {
-
+    public void writeFile(String filename, int filesize, List<byte[]> list) throws IOException {
+        FileOutputStream stream = new FileOutputStream(new File(filename));
+        for (byte[] bytes : list) {
+            stream.write(bytes, 0, Math.min(bytes.length, filesize));
+            filesize -= bytes.length;
+        }
     }
 }

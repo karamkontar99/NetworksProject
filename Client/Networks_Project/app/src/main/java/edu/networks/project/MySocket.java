@@ -14,7 +14,6 @@ import java.util.Optional;
 
 import edu.networks.project.messages.Message;
 
-
 public class MySocket {
     private final Socket clientSocket;
     private final BufferedReader reader;
@@ -26,10 +25,6 @@ public class MySocket {
         OutputStream outputStream = clientSocket.getOutputStream();
         reader = new BufferedReader(new InputStreamReader(inputStream));
         writer = new BufferedWriter(new OutputStreamWriter(outputStream));
-    }
-
-    public MySocket() throws IOException {
-        this("10.0.2.2");
     }
 
     public MySocket(String host) throws IOException {

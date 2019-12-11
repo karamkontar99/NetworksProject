@@ -27,9 +27,9 @@ public class Client {
     }
 
     public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + reader.readLine());
+        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + "." + reader.readLine());
         Message message = tClass.newInstance();
-        Field[] fields = tClass.getDeclaredFields();
+        Field[] fields = tClass.getFields();
         while (true) {
             final String line = reader.readLine();
             if (line.isEmpty()) break;
@@ -44,9 +44,12 @@ public class Client {
 
     public void sendMessage(Message message) throws IOException, IllegalAccessException {
         writer.write(message.getClass().getSimpleName() + "\r\n");
-        Field[] fields = message.getClass().getDeclaredFields();
-        for (Field field : fields)
+        Field[] fields = message.getClass().getFields();
+        for (Field field : fields) {
+            if (field == null || field.get(message) == null)
+                continue;
             writer.write(field.getName() + "=" + field.get(message).toString() + "\r\n");
+        }
         writer.write("\r\n");
         writer.flush();
     }

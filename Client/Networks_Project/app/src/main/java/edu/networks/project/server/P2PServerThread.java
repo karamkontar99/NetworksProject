@@ -15,6 +15,8 @@ public class P2PServerThread extends Thread {
     public void run() {
         super.run();
 
+
+
         try {
             P2PDownloadRequest request = (P2PDownloadRequest) socket.readMessage();
 

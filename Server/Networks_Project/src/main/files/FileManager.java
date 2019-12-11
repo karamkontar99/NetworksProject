@@ -1,15 +1,17 @@
 package main.files;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javax.inject.Inject;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class FileManager {
     private final String FILE_DIR = "Network_Project_File_Directory";
     private File dir;
 
+    @Inject
     public FileManager() {
         dir = new File(FILE_DIR);
         assert dir.exists() || dir.mkdir();
@@ -33,5 +35,23 @@ public class FileManager {
 
     private String getPath(String name) {
         return FILE_DIR + File.separator + name;
+    }
+
+    public List<byte[]> readFile(String filename) throws IOException {
+        FileInputStream stream = new FileInputStream(new File(filename));
+        ArrayList<byte[]> list = new ArrayList<>();
+        byte[] bytes = new byte[4096];
+        while (stream.read(bytes) > 0) {
+            list.add(bytes);
+        }
+        return list;
+    }
+
+    public void writeFile(String filename, int filesize, List<byte[]> list) throws IOException {
+        FileOutputStream stream = new FileOutputStream(new File(filename));
+        for (byte[] bytes : list) {
+            stream.write(bytes, 0, Math.min(bytes.length, filesize));
+            filesize -= bytes.length;
+        }
     }
 }
