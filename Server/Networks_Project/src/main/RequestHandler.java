@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Date;
 
+import static main.messages.EMsg.EExistRequest;
+
 public class RequestHandler extends Thread {
     private final LoginService loginService;
     private final RegistrationService registrationService;
@@ -33,30 +35,55 @@ public class RequestHandler extends Thread {
     @Override
     public void run() {
         try {
-                Message request = client.readMessage();
-                Message response;
+            MessageInterface msg = client.readMessage();
+            MessageInterface response;
 
-                if (request instanceof LoginRequest)
-                    response = loginService.execute((LoginRequest) request);
-
-                else if (request instanceof RegistrationRequest)
-                    response = registrationService.execute((RegistrationRequest) request);
-
-                else if (request instanceof ExitRequest)
-                    response = new ExitResponse();
-
-                else {
-                    response = new ExitResponse();
-                    response.error = "unknown request";
-                }
-
-                response.date = new Date().toString();
-                client.sendMessage(response);
-
+            switch (msg.getEMsg()) {
+                case ELoginRequest:
+                    response = loginService.execute((LoginRequest) msg);
+                    client.sendMessage(response);
+                    break;
+                case ERegistrationRequest:
+                    break;
+                case EFileUploadRequest:
+                    break;
+                case EExistRequest:
+                    break;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             client.close();
         }
     }
+
+//    @Override
+//    public void run() {
+//        try {
+//                Message request = client.readMessage();
+//                Message response;
+//
+//                if (request instanceof LoginRequest)
+//                    response = loginService.execute((LoginRequest) request);
+//
+//                else if (request instanceof RegistrationRequest)
+//                    response = registrationService.execute((RegistrationRequest) request);
+//
+//                else if (request instanceof ExitRequest)
+//                    response = new ExitResponse();
+//
+//                else {
+//                    response = new ExitResponse();
+//                    response.error = "unknown request";
+//                }
+//
+//                response.date = new Date().toString();
+//                client.sendMessage(response);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            client.close();
+//        }
+//    }
 }

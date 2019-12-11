@@ -1,58 +1,140 @@
 package main;
 
-import main.messages.Message;
+import main.messages.*;
 
 import java.io.*;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Optional;
 
 public class Client {
     private final Socket clientSocket;
-    private final BufferedReader reader;
-    private final BufferedWriter writer;
+    private final InputStream is;
+    private final OutputStream os;
     private final InetAddress ip;
     private final int port;
 
     public Client(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
-        InputStream inputStream = clientSocket.getInputStream();
-        OutputStream outputStream = clientSocket.getOutputStream();
-        reader = new BufferedReader(new InputStreamReader(inputStream));
-        writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+        this.is = clientSocket.getInputStream();
+        this.os = clientSocket.getOutputStream();
         ip = clientSocket.getInetAddress();
         port = clientSocket.getPort();
     }
 
-    public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + "." + reader.readLine());
-        Message message = tClass.newInstance();
-        Field[] fields = tClass.getFields();
-        while (true) {
-            final String line = reader.readLine();
-            if (line.isEmpty()) break;
-            Optional<Field> optionalField = Arrays.stream(fields).filter(f -> line.startsWith(f.getName())).findAny();
-            if (!optionalField.isPresent())
-                continue;
-            Field field = optionalField.get();
-            field.set(message, field.getType().cast(line.substring(field.getName().length())));
+    public MessageInterface readMessage() throws Exception {
+        // first we read the first 4 bytes to get the message size
+        byte[] sizeB = this.blockingRead(4);
+        int size = ByteBuffer.wrap(sizeB).getInt();
+        // size represents the size of the message without the header
+        byte[] codeB = this.blockingRead(4);
+        int code = ByteBuffer.wrap(codeB).getInt();
+
+        // Read the rest of the message
+        byte[] data = this.blockingRead(size);
+
+        MessageInterface message = null;
+
+        // TODO: Might be better to setup an EnumMap that
+        // maps the enum to class name
+
+        switch (code) {
+            case 1:
+                // Process LoginRequest Message
+                message = new LoginRequest();
+                break;
+            case 2:
+                // Process loginResponse message
+                message = new LoginResponse();
+                break;
+            case 3:
+                // Process RegistrationRequest message
+                message = new RegistrationRequest();
+                break;
+            case 4:
+                // Process RegistrationResponse message
+                message = new RegistrationResponse();
+                break;
+            case 5:
+                // Process UserInfo message
+                message = new UserInfo();
+                break;
+            case 6:
+                // Process FileUploadRequest
+                message = new FileUploadRequest();
+                break;
+            case 7:
+                // Process FileUploadResponse
+                message = new FileUploadResponse();
+                break;
+            case 8:
+                // Process ExitRequest
+                message = new ExitRequest();
+                break;
+            case 9:
+                // Process ExitResponse
+                message = new ExitResponse();
+                break;
+            default:
+                throw new Exception("Unknown EMsg");
         }
         return message;
     }
 
-    public void sendMessage(Message message) throws IOException, IllegalAccessException {
-        writer.write(message.getClass().getSimpleName() + "\r\n");
-        Field[] fields = message.getClass().getFields();
-        for (Field field : fields) {
-            if (field == null || field.get(message) == null)
-                continue;
-            writer.write(field.getName() + "=" + field.get(message).toString() + "\r\n");
-        }
-        writer.write("\r\n");
-        writer.flush();
+    public void sendMessage(MessageInterface message) throws Exception {
+        byte[] messageBytes = message.serializeToByteArray();
+
+        byte[] payload = new byte[8 + messageBytes.length];
+
+        ByteBuffer.wrap(payload, 0, 4).putInt(messageBytes.length);
+        ByteBuffer.wrap(payload, 4, 4).putInt(message.getEMsg().getValue());
+        System.arraycopy(messageBytes, 0, payload, 8, messageBytes.length);
+
+        os.write(payload);
+        os.flush();
     }
+
+    public byte[] blockingRead(int size) throws Exception {
+        byte[] data = new byte[size];
+        int read = 0;
+        int result;
+        while (read < size) {
+            result = is.read(data, read, size - read);
+            if (result == -1) {
+                throw new Exception("blockingRead error: reached EOF");
+            }
+            read += result;
+        }
+        return data;
+    }
+
+//    public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+//        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + reader.readLine());
+//        Message message = tClass.newInstance();
+//        Field[] fields = tClass.getDeclaredFields();
+//        while (true) {
+//            final String line = reader.readLine();
+//            if (line.isEmpty()) break;
+//            Optional<Field> optionalField = Arrays.stream(fields).filter(f -> line.startsWith(f.getName())).findAny();
+//            if (!optionalField.isPresent())
+//                continue;
+//            Field field = optionalField.get();
+//            field.set(message, field.getType().cast(line.substring(field.getName().length())));
+//        }
+//        return message;
+//    }
+//
+//    public void sendMessage(Message message) throws IOException, IllegalAccessException {
+//        writer.write(message.getClass().getSimpleName() + "\r\n");
+//        Field[] fields = message.getClass().getDeclaredFields();
+//        for (Field field : fields)
+//            writer.write(field.getName() + "=" + field.get(message).toString() + "\r\n");
+//        writer.write("\r\n");
+//        writer.flush();
+//    }
 
     public void close() {
         try {

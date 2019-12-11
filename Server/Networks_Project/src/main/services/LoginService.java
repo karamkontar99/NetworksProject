@@ -4,12 +4,15 @@ import main.messages.LoginRequest;
 import main.messages.LoginResponse;
 import main.models.User;
 import main.repos.UserRepository;
+import org.modelmapper.ModelMapper;
 
 public class LoginService implements Service<LoginRequest, LoginResponse> {
     private final UserRepository userRepository;
+    private final ModelMapper mapper;
 
-    public LoginService(UserRepository userRepository) {
+    public LoginService(UserRepository userRepository, ModelMapper mapper) {
         this.userRepository = userRepository;
+        this.mapper = mapper;
     }
 
     public LoginResponse execute(LoginRequest request) {
@@ -17,17 +20,13 @@ public class LoginService implements Service<LoginRequest, LoginResponse> {
 
         User user = userRepository.login(request.username, request.password);
 
+        response = new LoginResponse();
         if (user == null) {
-            response = new LoginResponse();
-            response.error = "invalid credentials";
+            response.status = 0;
         }
         else {
-            response = new LoginResponse();
-            response.id = user.getId();
-            response.name = user.getName();
-            response.address = user.getAddress();
-            response.email = user.getEmail();
-            response.username = user.getUsername();
+//            response = mapper.map(user, LoginResponse.class);
+            response.status = 1;
         }
 
         return response;

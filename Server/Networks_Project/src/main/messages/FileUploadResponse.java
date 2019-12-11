@@ -4,12 +4,12 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class LoginResponse implements MessageInterface {
+public class FileUploadResponse implements MessageInterface {
 	public int status;
 
 	@Override
 	public EMsg getEMsg() {
-		return EMsg.ELoginResponse;
+		return EMsg.EFileUploadResponse;
 	}
 
 	public void parseFromByteArray(byte[] bytes) throws Exception {
@@ -23,5 +23,4 @@ public class LoginResponse implements MessageInterface {
 		ByteBuffer.wrap(bytes, 0, 4).putInt(status);
 		return bytes;
 	}
-
 }
