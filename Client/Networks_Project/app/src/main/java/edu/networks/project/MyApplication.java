@@ -7,11 +7,13 @@ import java.net.ServerSocket;
 
 import edu.networks.project.dagger.ApplicationComponent;
 import edu.networks.project.dagger.DaggerApplicationComponent;
+import edu.networks.project.files.FileManager;
 
 public class MyApplication extends Application {
 
     private ApplicationComponent applicationComponent;
     private ServerSocket serverSocket;
+    private FileManager fileManager;
 
     private static String hostIp = "10.0.2.2";
 
@@ -48,6 +50,12 @@ public class MyApplication extends Application {
                 e.printStackTrace();
             }
         return serverSocket;
+    }
+
+    public synchronized FileManager getFileManager() {
+        if (fileManager == null)
+            fileManager = new FileManager(this);
+        return fileManager;
     }
 
     public static MySocket getSocketToServer() throws IOException {

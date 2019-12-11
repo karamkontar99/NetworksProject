@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6b92d1e-afc5-4e22-aecc-50865a600d2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LocalFilesActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/LocalFilesActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/files/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/files/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_local_files.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_local_files.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/content_local_files.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/content_local_files.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/files/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/files/FileManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/files/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/files/FileManager.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +158,7 @@
       <workItem from="1575548805183" duration="2020000" />
       <workItem from="1576063430260" duration="1034000" />
       <workItem from="1576072069878" duration="4192000" />
-      <workItem from="1576085740702" duration="873000" />
+      <workItem from="1576085740702" duration="1526000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1576063866052</created>
@@ -188,7 +174,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576075067521</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="commit before pull">
+      <created>1576087509718</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1576087509718</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,7 +204,8 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="commit" />
     <MESSAGE value="fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
+    <MESSAGE value="commit before pull" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit before pull" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
