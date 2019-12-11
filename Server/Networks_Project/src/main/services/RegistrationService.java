@@ -18,17 +18,18 @@ public class RegistrationService implements Service<RegistrationRequest, Registr
     @Override
     public RegistrationResponse execute(RegistrationRequest request) {
         RegistrationResponse response;
-
+        response = new RegistrationResponse();
         if (!userRepository.uniqueUsername(request.username)) {
-            response = new RegistrationResponse();
+
             //response.error = "username taken";
+            response.status = 0;
         }
         else {
             User user = mapper.map(request, User.class);
             userRepository.insert(user);
-            response = mapper.map(user, RegistrationResponse.class);
+            response.status = 1;
+            //response = mapper.map(user, RegistrationResponse.class);
         }
-
         return response;
     }
 }
