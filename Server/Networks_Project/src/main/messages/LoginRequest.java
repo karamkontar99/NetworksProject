@@ -11,19 +11,19 @@ public class LoginRequest extends Message {
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
-        byte[] usernameLengthB = Arrays.copyOfRange(bytes, index, index + 3);
+        byte[] usernameLengthB = Arrays.copyOfRange(bytes, index, index + 4);
         index += 4;
         int usernameLength = ByteBuffer.wrap(usernameLengthB).getInt();
 
-        byte[] usernameB = Arrays.copyOfRange(bytes, index, index + usernameLength - 1);
+        byte[] usernameB = Arrays.copyOfRange(bytes, index, index + usernameLength);
         index += usernameLength;
         String username = new String(usernameB, StandardCharsets.US_ASCII);
 
-        byte[] passwordLengthB = Arrays.copyOfRange(bytes, index, index + 3);
+        byte[] passwordLengthB = Arrays.copyOfRange(bytes, index, index + 4);
         index += 4;
 
         int passwordLength = ByteBuffer.wrap(passwordLengthB).getInt();
-        byte[] passwordB = Arrays.copyOfRange(bytes, index, index + passwordLength - 1);
+        byte[] passwordB = Arrays.copyOfRange(bytes, index, index + passwordLength);
         index += passwordLength;
         String password = new String(passwordB, StandardCharsets.US_ASCII);
 
