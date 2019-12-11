@@ -1,28 +1,24 @@
 package main;
 
 import main.messages.*;
-import main.services.ClientServerUpload;
+import main.services.FileUploadService;
 import main.services.LoginService;
 import main.services.RegistrationService;
-import services.ClientServerDownload;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Date;
-
-import static main.messages.EMsg.EExistRequest;
 
 public class RequestHandler extends Thread {
     private final LoginService loginService;
     private final RegistrationService registrationService;
-    private final ClientServerUpload clientServerUpload;
-    private final ClientServerDownload clientServerDownload;
+    private final FileUploadService fileUploadService;
+    private final services.FileDownloadService fileDownloadService;
 
-    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload) {
+    public RequestHandler(LoginService loginService, RegistrationService registrationService, FileUploadService fileUploadService, services.FileDownloadService fileDownloadService) {
         this.loginService = loginService;
         this.registrationService = registrationService;
-        this.clientServerUpload = clientServerUpload;
-        this.clientServerDownload = clientServerDownload;
+        this.fileUploadService = fileUploadService;
+        this.fileDownloadService = fileDownloadService;
     }
 
     private Client client;
@@ -44,6 +40,8 @@ public class RequestHandler extends Thread {
                     client.sendMessage(response);
                     break;
                 case ERegistrationRequest:
+                    response = FileUploadService.execute((FileUploadRequest) msg);
+                    client.sendMessage(response);
                     break;
                 case EFileUploadRequest:
                     break;
