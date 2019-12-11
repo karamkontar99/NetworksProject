@@ -33,8 +33,22 @@ public class LoginRequest extends Message {
     }
 
     public byte[] serializeToByteArray() {
+        int index = 0;
         byte[] bytes = new byte[4 + 4 + username.length() + password.length()];
-        
+        // first 4 bytes should be usernameLength
+        ByteBuffer.wrap(bytes, 0, 4).putInt(username.length());
+        index += 4;
+        byte[] usernameBytes = this.username.getBytes(StandardCharsets.US_ASCII);
+        System.arraycopy(usernameBytes, 0, bytes, index, username.length());
+        index += username.length();
+
+        ByteBuffer.wrap(bytes, index, 4).putInt(password.length());
+        index += 4;
+        byte[] passwordBytes = this.password.getBytes(StandardCharsets.US_ASCII);
+        System.arraycopy(passwordBytes, 0, bytes, index, password.length());
+        index += password.length();
+
+        return bytes;
     }
 
 }
