@@ -4,15 +4,17 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileDownloadResponse {
+public class FileDownloadResponse implements MessageInterface {
     public int id;
     public int status;
     public int fileSize;
     public String fileName;
     public byte[] data;
 
-
-
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.EFileDownloadResponse;
+    }
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
 

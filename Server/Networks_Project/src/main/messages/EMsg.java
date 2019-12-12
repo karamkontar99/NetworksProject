@@ -12,10 +12,12 @@ public enum EMsg {
     EUserInfo(5),
     EFileUploadRequest(6),
     EFileUploadResponse(7),
-    EExistRequest(8),
-    EExitResponse(9),
-    EFileListRequest(10),
-    EFileListResponse(11);
+    EFileDownloadRequest(8),
+    EFileDownloadResponse(9),
+    EExistRequest(10),
+    EExitResponse(11),
+    EFileListRequest(12),
+    EFileListResponse(13);
 
     private int value;
     private static Map map = new HashMap<>();
