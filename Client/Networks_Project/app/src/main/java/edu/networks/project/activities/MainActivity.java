@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import java.io.File;
-import java.util.Timer;
 import java.util.TimerTask;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        FileProgressNotification notification = new FileProgressNotification(getApplicationContext(), "First File", 1000, true);
-        Timer timer = new Timer();
-        timer.schedule(new MyTask(notification), 0, 3000);
-
-        FileProgressNotification notification1 = new FileProgressNotification(getApplicationContext(), "Second File", 1000, true);
-        Timer timer1 = new Timer();
-        timer1.schedule(new MyTask(notification1), 0, 3000);
+//        FileProgressNotification notification = new FileProgressNotification(getApplicationContext(), "First File", true);
+//        Timer timer = new Timer();
+//        timer.schedule(new MyTask(notification), 0, 3000);
+//
+//        FileProgressNotification notification1 = new FileProgressNotification(getApplicationContext(), "Second File"1000, true);
+//        Timer timer1 = new Timer();
+//        timer1.schedule(new MyTask(notification1), 0, 3000);
 
     }
 
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         public void run() {
             size += 10;
-            notification.updateNotification(size);
+            notification.updateNotification(size, maxSize);
 
             if (size >= maxSize)
                 notification.finishNotification(new File(""));

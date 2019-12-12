@@ -1,4 +1,4 @@
-package main.messages;
+package edu.networks.project.messages;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;

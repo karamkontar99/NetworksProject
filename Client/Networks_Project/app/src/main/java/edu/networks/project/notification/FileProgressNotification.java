@@ -18,19 +18,17 @@ public class FileProgressNotification {
     private int NOTIFICATION_ID;
 
     private final String fileName;
-    private final int fileSize;
     private final boolean isDownload;
 
-    public FileProgressNotification(Context context, String fileName, int fileSize, boolean isDownload) {
+    public FileProgressNotification(Context context, String fileName, boolean isDownload) {
         this.context = context;
         this.fileName = fileName;
-        this.fileSize = fileSize;
         this.isDownload = isDownload;
         NOTIFICATION_ID = fileName.hashCode();
 
         builder = new NotificationCompat.Builder(context, context.getPackageName())
                 .setContentTitle(fileName)
-                .setContentText((isDownload ? "downloading " : "uploading ") + " 0/" + fileSize + "B")
+                .setContentText((isDownload ? "downloading " : "uploading ") + "...")
                 .setSmallIcon(isDownload ? android.R.drawable.stat_sys_download : android.R.drawable.stat_sys_upload)
                 .setProgress(100, 0, false)
                 .setAutoCancel(false)
@@ -45,9 +43,9 @@ public class FileProgressNotification {
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
-    public void updateNotification(int size) {
-        builder.setContentText((isDownload ? "downloading" : "uploading") + " " + size + "/" + fileSize + "B")
-                .setProgress(100, Math.min(size, fileSize) * 100 / fileSize, false)
+    public void updateNotification(int size, int total) {
+        builder.setContentText((isDownload ? "downloading" : "uploading") + " " + size + "/" + total + "B")
+                .setProgress(100, size * 100 / total, false)
                 .setOngoing(true);
 
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
@@ -67,8 +65,9 @@ public class FileProgressNotification {
                 .setContentTitle("The file transfer completed successfully")
                 .setSmallIcon(isDownload ? android.R.drawable.stat_sys_download_done : android.R.drawable.stat_sys_upload_done)
                 .setOngoing(false)
-                .setAutoCancel(true)
-                .setContentIntent(getIntent(file));
+                .setAutoCancel(true);
+        if (file != null)
+                builder.setContentIntent(getIntent(file));
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 

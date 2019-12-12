@@ -1,11 +1,15 @@
 package edu.networks.project.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,21 +21,31 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import edu.networks.project.DocumentAdapter;
 import edu.networks.project.R;
+import edu.networks.project.files.FileManager;
+import edu.networks.project.messages.FileUploadRequest;
+import edu.networks.project.messages.FileUploadResponse;
 import edu.networks.project.models.Document;
+import edu.networks.project.notification.FileProgressNotification;
+import edu.networks.project.services.FileUploadService;
 
 public class ClientServerActivity extends AppCompatActivity {
+    private final int CHOOSE_FILE_REQUEST_CODE = 100;
 
     private List<Document> documents = new ArrayList<>();
     private DocumentAdapter adapter;
     private SearchView searchView;
     private ProgressBar progressBar;
-    
+
+    private FileManager fileManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_server);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fileManager = new FileManager(getApplicationContext());
 
         progressBar = findViewById(R.id.progressBar);
         RecyclerView recyclerView = findViewById(R.id.recycleview);
@@ -48,87 +62,59 @@ public class ClientServerActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.setType("*/*");
-//            startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
+            startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
         });
 
-//        new PopulateList().execute();
     }
 
-//    private class PopulateList extends AsyncTask<Void, Void, List<Document>> {
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//            progressBar.setVisibility(View.VISIBLE);
-//            progressBar.requestFocus();
-//        }
-//
-//        @Override
-//        protected LoginResponse doInBackground(Void... voids) {
-//            LoginRequest request = requests[0];
-//            LoginResponse response = LoginService.execute(request);
-//            return response;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(LoginResponse response) {
-//            super.onPostExecute(response);
-//            progressBar.setVisibility(View.GONE);
-//            for (AutoCompleteTextView field : allFields)
-//                field.setEnabled(true);
-//            if (response.status == 0) {
-//                Snackbar.make(progressBar, "an error occurred", Snackbar.LENGTH_LONG).show();
-//            }
-//            else {
-//                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        }
-//    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CHOOSE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
+            String filePath = data.getDataString();
+            File file = new File(filePath);
 
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == CHOOSE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
-//            String filePath = data.getDataString();
-//            File file = new File(filePath);
-//
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setTitle("Choose file name");
-//
-//            final EditText input = new EditText(builder.getContext());
-//            input.setInputType(InputType.TYPE_CLASS_TEXT);
-//            input.setText(file.getName());
-//            builder.setView(input);
-//
-//            builder.setPositiveButton("OK", (dialog, i) -> {
-//                String fileName = input.getText().toString();
-//                if (!file.getName().equals(fileName)) {
-//                    if (fileName.isEmpty()) {
-//                        input.setError("cannot be empty");
-//                        return;
-//                    }
-//                    if (fileManager.hasFile(fileName)) {
-//                        input.setError("file name already exists");
-//                        return;
-//                    }
-//                    try {
-//                        fileManager.addFile(fileName, file);
-//                        mAllFiles.add(0, fileManager.getFile(fileName));
-//                        mSearchView.setQuery("", true);
-//                    } catch (Exception e) {
-//                        Snackbar.make(mSearchView, "an error occurred", Snackbar.LENGTH_SHORT).show();
-//                    }
-//                }
-//                dialog.dismiss();
-//            });
-//
-//            builder.setNegativeButton("Cancel", (dialog, i) -> {
-//                dialog.dismiss();
-//            });
-//
-//            builder.show();
-//        }
-//    }
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Choose file name");
 
+            final EditText input = new EditText(builder.getContext());
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            input.setText(file.getName());
+            builder.setView(input);
+
+            builder.setPositiveButton("OK", (dialog, i) -> {
+                String fileName = input.getText().toString();
+
+                dialog.dismiss();
+            });
+
+            builder.setNegativeButton("Cancel", (dialog, i) -> {
+                dialog.dismiss();
+            });
+
+            builder.show();
+        }
+    }
+
+    private class FileUploadThread extends Thread {
+        private final FileUploadRequest request;
+        private final FileProgressNotification notification;
+
+        FileUploadThread(FileUploadRequest request, FileProgressNotification notification) {
+            this.request = request;
+            this.notification = notification;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+
+            FileUploadResponse response = FileUploadService.execute(request, notification::updateNotification);
+            if (response.status == 1)
+                notification.finishNotification(null);
+            else
+                notification.failNotification();
+        }
+    }
 
     private void setupAdapter() {
         adapter.setOnDocumentClickListener(((document, index) -> {

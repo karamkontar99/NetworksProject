@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class LoginService implements Service<LoginRequest, LoginResponse> {
     private final UserRepository userRepository;
-    private Logger logger = Logger.getLogger(getClass().getSimpleName());
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     public LoginService(UserRepository userRepository) {
         this.userRepository = userRepository;

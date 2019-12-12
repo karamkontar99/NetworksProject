@@ -1,14 +1,13 @@
 package edu.networks.project.files;
 
 import android.content.Context;
+import android.os.Environment;
+import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,8 +16,9 @@ public class FileManager {
     private File dir;
 
     public FileManager(Context context) {
-        dir = new File(context.getFilesDir(), DIR_NAME);
+        dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), DIR_NAME);
         assert dir.exists() || dir.mkdir();
+        Log.e("SOCKETS", "dir null? " + (dir == null));
     }
 
     public boolean hasFile(String name) {
@@ -49,23 +49,11 @@ public class FileManager {
         FileUtils.moveFile(getFile(oldName), getFile(newName));
     }
 
-    public List<byte[]> readFile(String name) throws IOException {
-        FileInputStream stream = new FileInputStream(getFile(name));
-        ArrayList<byte[]> list = new ArrayList<>();
-        byte[] bytes = new byte[4096];
-        while (stream.read(bytes) > 0) {
-            list.add(bytes);
-        }
-        stream.close();
-        return list;
+    public byte[] readFile(String name) throws IOException {
+        return FileUtils.readFileToByteArray(getFile(name));
     }
 
-    public void writeFile(String name, int size, List<byte[]> list) throws IOException {
-        FileOutputStream stream = new FileOutputStream(getFile(name));
-        for (byte[] bytes : list) {
-            stream.write(bytes, 0, Math.min(bytes.length, size));
-            size -= bytes.length;
-        }
-        stream.close();
+    public void writeFile(String name, byte[] data) throws IOException {
+        FileUtils.writeByteArrayToFile(getFile(name), data);
     }
 }

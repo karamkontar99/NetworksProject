@@ -1,9 +1,8 @@
 package main.services;
 
 import main.files.FileManager;
-import main.messages.*;
-
-import java.io.IOException;
+import main.messages.FileUploadRequest;
+import main.messages.FileUploadResponse;
 
 public class FileUploadService implements Service<FileUploadRequest, FileUploadResponse> {
     private final FileManager fileManager;
@@ -12,16 +11,22 @@ public class FileUploadService implements Service<FileUploadRequest, FileUploadR
         this.fileManager = fileManager;
     }
 
-    public  FileUploadResponse execute(FileUploadRequest request) throws IOException {
+    public  FileUploadResponse execute(FileUploadRequest request) {
         FileUploadResponse response;
         response = new FileUploadResponse();
 
-        if (fileManager.hasFile(request.fileName)) {
+        try {
+            if (fileManager.hasFile(request.fileName)) {
+                response.status = 0;
+            } else {
+                response.status = 1;
+                fileManager.createFile(request.fileName, request.data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             response.status = 0;
-        } else {
-            response.status = 1;
-            fileManager.createFile(request.fileName, request.data);
         }
+
         return response;
     }
 }

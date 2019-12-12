@@ -23,11 +23,17 @@ public class MySocket {
     private final Socket socket;
     private final DataInputStream is;
     private final DataOutputStream os;
+    private final OnProgressUpdateListener listener;
 
     public MySocket() throws IOException {
+        this(null);
+    }
+
+    public MySocket(OnProgressUpdateListener listener) throws IOException {
         this.socket = new Socket(serverIp, 5050);
         this.is = new DataInputStream(socket.getInputStream());
         this.os = new DataOutputStream(socket.getOutputStream());
+        this.listener = listener;
     }
 
     public MessageInterface readMessage() throws Exception {
@@ -107,13 +113,28 @@ public class MySocket {
         int read = 0;
         int result;
         while (read < size) {
-            result = is.read(data, read, size - read);
+            result = is.read(data, read, Math.min(4096, size - read));
+            if (listener != null)
+                listener.onProgressUpdate(read, size);
             if (result == -1) {
                 throw new Exception("blockingRead error: reached EOF");
             }
             read += result;
         }
         return data;
+    }
+
+    public void blockingWrite(byte[] data) throws Exception {
+        int size = data.length;
+        int written = 0;
+        int result;
+        while (written < size) {
+            os.write(data, written, Math.min(4096, size - written));
+            written += Math.min(4096, size - written);
+            if (listener != null)
+                listener.onProgressUpdate(written, size);
+        }
+        os.flush();
     }
 
     
@@ -127,5 +148,9 @@ public class MySocket {
 
     public static void setServerIp(String serverIp) {
         MySocket.serverIp = serverIp;
+    }
+
+    public interface OnProgressUpdateListener {
+        void onProgressUpdate(int size, int total);
     }
 }

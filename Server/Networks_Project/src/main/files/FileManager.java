@@ -1,7 +1,5 @@
 package main.files;
 
-import org.graalvm.compiler.graph.spi.Canonicalizable;
-
 import java.io.*;
 import java.util.Arrays;
 import java.util.Objects;

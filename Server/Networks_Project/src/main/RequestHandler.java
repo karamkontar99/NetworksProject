@@ -37,13 +37,12 @@ public class RequestHandler extends Thread {
             switch (msg.getEMsg()) {
                 case ELoginRequest:
                     response = loginService.execute((LoginRequest) msg);
-                    client.sendMessage(response);
                     break;
                 case ERegistrationRequest:
-                    response = FileUploadService.execute((FileUploadRequest) msg);
-                    client.sendMessage(response);
+                    response = registrationService.execute((RegistrationRequest) msg);
                     break;
                 case EFileUploadRequest:
+                    response = fileUploadService.execute((FileUploadRequest) msg);
                     break;
                 case EExistRequest:
                     break;
