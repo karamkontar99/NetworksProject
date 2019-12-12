@@ -2,43 +2,58 @@ package main.messages;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class FileListResponse implements  MessageInterface{
-    public int listsize;
-    public int ItemLenght;
-    public String ItemName;
-    public int NextItemSize;
+    public int status;
+    public List<String> names;
+    public List<Integer> sizes;
+
+    public FileListResponse()
+    {
+        this.names = new LinkedList<String>();
+        this.sizes = new LinkedList<Integer>();
+    }
+
+    public void addFile(String name, int size)
+    {
+        this.names.add(name);
+        this.sizes.add(size);
+    }
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
 
-        byte[] listsizeB = Arrays.copyOfRange(bytes, index, index + 4);
-        int listsize = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+        /*
+        First 4 bytes is the status
+        first 4 bytes are the length (number of items) of the list
+        then every set of bytes is the length of the name then the name then the filezise (4 bytes)
+        */
+
+        this.status = ByteBuffer.wrap(bytes, index, index + 4).getInt();
         index += 4;
 
-        byte[] ItemLengthB = Arrays.copyOfRange(bytes, index, index + 4);
-        int ItemLength = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+        if (this.status != 1) {
+            // if the response is not successful, there wont be a list of files
+            return;
+        }
+
+        int count = ByteBuffer.wrap(bytes, index, index + 4).getInt();
         index += 4;
 
-        byte[] ItemNamelengthB = Arrays.copyOfRange(bytes, index, index + 4);
-        int ItemNamelength = ByteBuffer.wrap(ItemNamelengthB).getInt();
-        index += 4;
-
-        byte[] ItemNameB = Arrays.copyOfRange(bytes, index, index + ItemNamelength);
-        String fileName = new String(ItemNameB, StandardCharsets.US_ASCII);
-        index += ItemNamelength;
-
-
-        byte[] NextItemSizeB = Arrays.copyOfRange(bytes, index, index + 4);
-        int NextItemSize = ByteBuffer.wrap(bytes, index, index + 4).getInt();
-        index += 4;
-
-        this.listsize = listsize;
-        this.ItemLenght = ItemLength;
-        this.ItemName = fileName;
-        this.NextItemSize = NextItemSize;
-
+        for (int i = 0; i < count; i++) {
+            // first read the first 4 bytes to get the file size
+            // then read the next 4 bytes to get the string length
+            // then read the string
+            int size = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+            index += 4;
+            int fileNameLength = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+            index += 4;
+            String fileName = new String(bytes, index, fileNameLength, StandardCharsets.US_ASCII);
+            index += fileNameLength;
+            this.addFile(fileName, size);
+        }
     }
 
     @Override
@@ -48,20 +63,38 @@ public class FileListResponse implements  MessageInterface{
 
     public byte[] serializeToByteArray() {
         int index = 0;
-        byte[] bytes = new byte[4 + 4 + 4 + 4 + listsize + ItemLenght + ItemName.length() + NextItemSize];
+        byte[] bytes = null;
 
-        ByteBuffer.wrap(bytes, 0, 4).putInt(listsize);
+        if (this.status != 1) {
+            bytes = new byte[4];
+            ByteBuffer.wrap(bytes).putInt(this.status);
+            return bytes;
+        }
+
+        int neededBytes = 4 + 4;
+
+        // calculate needed bytes to serialize lit
+        for (int i = 0; i < this.names.size(); i++) {
+            neededBytes += 4 + 4 + this.names.get(i).length();
+        }
+
+        bytes = new byte[4 + 4 + neededBytes];
+
+        ByteBuffer.wrap(bytes, index, 4).putInt(this.status);
         index += 4;
 
-        ByteBuffer.wrap(bytes, index, 4).putInt(ItemLenght);
+        // put element count
+        ByteBuffer.wrap(bytes, index, 4).putInt(this.names.size());
         index += 4;
 
-        byte[] fileNameBytes = this.ItemName.getBytes(StandardCharsets.US_ASCII);
-        System.arraycopy(fileNameBytes, 0, bytes, index, ItemName.length());
-        index += ItemName.length();
-
-        ByteBuffer.wrap(bytes, index, 4).putInt(NextItemSize);
-        index += 4;
+        for (int i = 0; i < this.names.size(); i++) {
+            ByteBuffer.wrap(bytes, index, 4).putInt(this.sizes.get(i));
+            index += 4;
+            ByteBuffer.wrap(bytes, index, index + 4).putInt(this.names.get(i).length());
+            index += 4;
+            System.arraycopy(this.names.get(i).getBytes(StandardCharsets.US_ASCII), 0, bytes, index, this.names.get(i).length());
+            index += this.names.get(i).length();
+        }
 
         return bytes;
     }

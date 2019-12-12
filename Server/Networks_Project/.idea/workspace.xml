@@ -2,38 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6b92d1e-afc5-4e22-aecc-50865a600d2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/files/FileManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/P2PDownloadRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/P2PDownloadResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/services/LogoutService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/RegistrationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/RegistrationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationModule.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/RegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/RegistrationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/TestMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/TestMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/messages/FileListResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/messages/FileListResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Client.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/RequestHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/RequestHandler$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/EMsg.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/EMsg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/FileListRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/FileListRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/models/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/models/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/DocumentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/DocumentRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/Repository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/Repository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/repos/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/UserInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/UserInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/services/ClientServerUpload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/ClientServerUpload.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Login.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Register.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/services/LoginService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/LoginService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/services/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/Service.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/services/ClientServerDownload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/ClientServerDownload.class" afterDir="false" />
     </list>
@@ -46,6 +30,118 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/services/Service.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/RequestHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="265">
+              <caret line="42" column="7" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/services/ClientServerUpload.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding>
+                <element signature="e#312#313#0" expanded="true" />
+                <element signature="e#339#340#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/services/ClientServerDownload.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <element signature="e#387#388#0" expanded="true" />
+                <element signature="e#414#415#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/messages/FileListResponse.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="89" column="53" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+              <folding>
+                <element signature="e#1896#1897#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/messages/FileListRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/TestMessage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="750">
+              <caret line="597" column="10" selection-start-line="597" selection-start-column="10" selection-end-line="597" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/messages/LoginRequest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="570">
+              <caret line="51" column="80" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -55,8 +151,25 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>this.size</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/main/RequestHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" />
+        <option value="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" />
+        <option value="$PROJECT_DIR$/src/main/TestMessage.java" />
+        <option value="$PROJECT_DIR$/src/main/messages/FileListResponse.java" />
+      </list>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -68,6 +181,56 @@
   <component name="ProjectId" id="1Tf8xBrafCfA1Zk8ZI9mK4U9c9E" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Networks_Project" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Networks_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Networks_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Networks_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="messages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Networks_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Networks_Project" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -103,7 +266,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.TestMessage">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="project" />
@@ -150,8 +313,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestMessage" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.TestMessage" />
+      <module name="project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestMessage" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
@@ -183,4 +360,239 @@
       <workItem from="1574162165955" duration="487000" />
       <workItem from="1574162910645" duration="1671000" />
       <workItem from="1574356572573" duration="8918000" />
-      <workItem
+      <workItem from="1574420593320" duration="8000" />
+      <workItem from="1574506524157" duration="1896000" />
+      <workItem from="1574514618212" duration="543000" />
+      <workItem from="1574527284653" duration="1211000" />
+      <workItem from="1574969816453" duration="2518000" />
+      <workItem from="1575548805183" duration="2020000" />
+      <workItem from="1576063430260" duration="1034000" />
+      <workItem from="1576072069878" duration="4192000" />
+      <workItem from="1576085740702" duration="1526000" />
+      <workItem from="1576096680971" duration="621000" />
+    </task>
+    <task id="LOCAL-00001" summary="commit">
+      <created>1576063866052</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1576063866052</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fixes">
+      <created>1576075067521</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576075067521</updated>
+    </task>
+    <task id="LOCAL-00003" summary="commit before pull">
+      <created>1576087509718</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1576087509718</updated>
+    </task>
+    <task id="LOCAL-00004" summary="merged">
+      <created>1576097260580</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1576097260580</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24964234" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.32891566" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="PlantUML" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Image Layers" order="0" />
+      <window_info id="Designer" order="1" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.24964234" />
+      <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Messages" order="3" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info anchor="bottom" id="Run" order="6" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Theme Preview" order="2" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="PlantUML" order="5" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <MESSAGE value="commit" />
+    <MESSAGE value="fixes" />
+    <MESSAGE value="commit before pull" />
+    <MESSAGE value="merged" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/messages/LoginRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="51" column="80" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="597" column="10" selection-start-line="597" selection-start-column="10" selection-end-line="597" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/Service.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/RequestHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="42" column="7" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/ClientServerDownload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/services/ClientServerUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/TestMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/messages/FileListRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/messages/FileListResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="89" column="53" selection-start-line="89" selection-start-column="53" selection-end-line="89" selection-end-column="53" />
+          <folding>
+            <element signature="e#1896#1897#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

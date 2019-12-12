@@ -1,9 +1,9 @@
 package main;
 
+import main.messages.FileListResponse;
 import main.messages.LoginRequest;
 
 import java.io.*;
-import java.nio.file.Files;
 
 public class TestMessage {
 
@@ -18,6 +18,19 @@ public class TestMessage {
         rq2.parseFromByteArray(bytes);
         System.out.println("Username is: '" + rq2.username + "'");
         System.out.println("Password is: '" + rq2.password + "'");
+
+        FileListResponse res = new FileListResponse();
+        res.status = 1;
+        res.addFile("File 1", 1024);
+        bytes = res.serializeToByteArray();
+
+        System.out.println(res.sizes.get(0));
+
+        FileListResponse res2 = new FileListResponse();
+        res2.parseFromByteArray(bytes);
+        System.out.println(res2.names.toString());
+        System.out.println(res2.sizes.toString());
+
         //write();
         //read();
     }
