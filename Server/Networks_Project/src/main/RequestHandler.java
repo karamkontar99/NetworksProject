@@ -1,9 +1,10 @@
 package main;
 
 import main.messages.*;
-import main.services.FileUploadService;
+import main.services.ClientServerUpload;
 import main.services.LoginService;
 import main.services.RegistrationService;
+import services.ClientServerDownload;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -11,14 +12,14 @@ import java.net.Socket;
 public class RequestHandler extends Thread {
     private final LoginService loginService;
     private final RegistrationService registrationService;
-    private final FileUploadService fileUploadService;
-    private final services.FileDownloadService fileDownloadService;
+    private final ClientServerUpload clientServerUpload;
+    private final ClientServerDownload clientServerDownload;
 
-    public RequestHandler(LoginService loginService, RegistrationService registrationService, FileUploadService fileUploadService, services.FileDownloadService fileDownloadService) {
+    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload) {
         this.loginService = loginService;
         this.registrationService = registrationService;
-        this.fileUploadService = fileUploadService;
-        this.fileDownloadService = fileDownloadService;
+        this.clientServerUpload = clientServerUpload;
+        this.clientServerDownload = clientServerDownload;
     }
 
     private Client client;
@@ -39,16 +40,22 @@ public class RequestHandler extends Thread {
                     response = loginService.execute((LoginRequest) msg);
                     break;
                 case ERegistrationRequest:
-                    response = registrationService.execute((RegistrationRequest) msg);
+                    response = RegistrationService.execute((RegistrationRequest) msg);
                     break;
                 case EFileUploadRequest:
-                    response = fileUploadService.execute((FileUploadRequest) msg);
+                    response = FileUploadService.execute((FileUploadRequest) msg);
                     break;
                 case EExistRequest:
                     break;
+                case EFileListRequest:
+                    response = loginService.execute((LoginRequest) msg);
+                    break;
+                case EFileDownloadRequest:
+                    response = FileDownloadService.execute((FileDownloadRequest) msg);
+                    break;
             }
-
             client.sendMessage(response);
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

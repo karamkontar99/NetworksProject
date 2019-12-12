@@ -4,12 +4,14 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileDownloadResponse {
+
+public class FileDownloadResponse implements MessageInterface {
     public int id;
     public int status;
     public int fileSize;
     public String fileName;
     public byte[] data;
+
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
@@ -24,10 +26,12 @@ public class FileDownloadResponse {
 
         index += 4;
 
+
         byte[] filseSizeB = Arrays.copyOfRange(bytes, index, index + 4);
         int fileSize = ByteBuffer.wrap(bytes, index, index + 4).getInt();
 
         index += 4;
+
 
         byte[] fileNamelengthB = Arrays.copyOfRange(bytes, index, index + 4);
         index += 4;
@@ -42,6 +46,7 @@ public class FileDownloadResponse {
         byte[] dataB = Arrays.copyOfRange(bytes, index, index + datalength);
         index += datalength;
 
+
         this.id = id;
         this.status = status;
         this.fileSize = fileSize;
@@ -49,10 +54,15 @@ public class FileDownloadResponse {
         this.data = dataB;
     }
 
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.EFileDownloadResponse;
+    }
+
     public byte[] serializeToByteArray() {
 
         int index = 0;
-        byte[] bytes = new byte[4 + 4 + 4 +4 +4 + fileSize + fileName.length() + data.length +id+status];
+        byte[] bytes = new byte[4 + 4 + 4 + 4 + 4 + fileSize + fileName.length() + data.length + id + status];
         // first 4 bytes should be usernameLength
 
         ByteBuffer.wrap(bytes, 0, 4).putInt(id);

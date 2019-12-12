@@ -2,29 +2,24 @@ package main;
 
 import main.messages.*;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Client {
-    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
-
     private final Socket clientSocket;
-    private final DataInputStream is;
-    private final DataOutputStream os;
+    private final InputStream is;
+    private final OutputStream os;
     private final InetAddress ip;
     private final int port;
 
     public Client(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
-        this.is = new DataInputStream(clientSocket.getInputStream());
-        this.os = new DataOutputStream(clientSocket.getOutputStream());
+        this.is = clientSocket.getInputStream();
+        this.os = clientSocket.getOutputStream();
         ip = clientSocket.getInetAddress();
         port = clientSocket.getPort();
     }
@@ -82,18 +77,29 @@ public class Client {
                 // Process ExitResponse
                 message = new ExitResponse();
                 break;
+            case 10:
+                message = new FileListRequest();
+                break;
+            case 11:
+                message = new FileListResponse();
+                break;
+
+            case 12:
+                message = new FileDownloadRequest();
+                break;
+
+            case 13:
+                message = new FileDownloadResponse();
+                break;
             default:
                 throw new Exception("Unknown EMsg");
         }
-
-        logger.log(Level.INFO, "received data " + Arrays.toString(data));
-
-        message.parseFromByteArray(data);
         return message;
     }
 
     public void sendMessage(MessageInterface message) throws Exception {
         byte[] messageBytes = message.serializeToByteArray();
+
         byte[] payload = new byte[8 + messageBytes.length];
 
         ByteBuffer.wrap(payload, 0, 4).putInt(messageBytes.length);
@@ -101,9 +107,6 @@ public class Client {
         System.arraycopy(messageBytes, 0, payload, 8, messageBytes.length);
 
         os.write(payload);
-
-        logger.log(Level.INFO, "sent paylod " + Arrays.toString(payload));
-
         os.flush();
     }
 
@@ -121,10 +124,33 @@ public class Client {
         return data;
     }
 
+//    public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+//        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + reader.readLine());
+//        Message message = tClass.newInstance();
+//        Field[] fields = tClass.getDeclaredFields();
+//        while (true) {
+//            final String line = reader.readLine();
+//            if (line.isEmpty()) break;
+//            Optional<Field> optionalField = Arrays.stream(fields).filter(f -> line.startsWith(f.getName())).findAny();
+//            if (!optionalField.isPresent())
+//                continue;
+//            Field field = optionalField.get();
+//            field.set(message, field.getType().cast(line.substring(field.getName().length())));
+//        }
+//        return message;
+//    }
+//
+//    public void sendMessage(Message message) throws IOException, IllegalAccessException {
+//        writer.write(message.getClass().getSimpleName() + "\r\n");
+//        Field[] fields = message.getClass().getDeclaredFields();
+//        for (Field field : fields)
+//            writer.write(field.getName() + "=" + field.get(message).toString() + "\r\n");
+//        writer.write("\r\n");
+//        writer.flush();
+//    }
+
     public void close() {
         try {
-            is.close();
-            os.close();
             clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
