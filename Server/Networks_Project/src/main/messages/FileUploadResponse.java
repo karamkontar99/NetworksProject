@@ -7,6 +7,7 @@ import java.util.Arrays;
 public class FileUploadResponse implements MessageInterface {
 	public int status;
 
+
 	@Override
 	public EMsg getEMsg() {
 		return EMsg.EFileUploadResponse;
