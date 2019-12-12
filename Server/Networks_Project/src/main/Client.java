@@ -2,13 +2,12 @@ package main;
 
 import main.messages.*;
 
-import java.io.*;
-import java.lang.reflect.Field;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Optional;
 
 public class Client {
     private final Socket clientSocket;
@@ -77,6 +76,12 @@ public class Client {
             case 9:
                 // Process ExitResponse
                 message = new ExitResponse();
+                break;
+            case 10:
+                message = new FileListRequest();
+                break;
+            case 11:
+                message = new FileListResponse();
                 break;
             default:
                 throw new Exception("Unknown EMsg");

@@ -13,7 +13,9 @@ public enum EMsg {
     EFileUploadRequest(6),
     EFileUploadResponse(7),
     EExistRequest(8),
-    EExitResponse(9);
+    EExitResponse(9),
+    EFileListRequest(10),
+    EFileListResponse(11);
 
     private int value;
     private static Map map = new HashMap<>();
