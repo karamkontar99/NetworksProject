@@ -2,25 +2,24 @@ package main;
 
 import main.messages.*;
 
-import java.io.*;
-import java.lang.reflect.Field;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.util.Arrays;
-import java.util.Optional;
 
 public class Client {
     private final Socket clientSocket;
-    private final InputStream is;
-    private final OutputStream os;
+    private final DataInputStream is;
+    private final DataOutputStream os;
     private final InetAddress ip;
     private final int port;
 
     public Client(Socket clientSocket) throws IOException {
         this.clientSocket = clientSocket;
-        this.is = clientSocket.getInputStream();
-        this.os = clientSocket.getOutputStream();
+        this.is = new DataInputStream(clientSocket.getInputStream());
+        this.os = new DataOutputStream(clientSocket.getOutputStream());
         ip = clientSocket.getInetAddress();
         port = clientSocket.getPort();
     }
@@ -81,12 +80,13 @@ public class Client {
             default:
                 throw new Exception("Unknown EMsg");
         }
+
+        message.parseFromByteArray(data);
         return message;
     }
 
     public void sendMessage(MessageInterface message) throws Exception {
         byte[] messageBytes = message.serializeToByteArray();
-
         byte[] payload = new byte[8 + messageBytes.length];
 
         ByteBuffer.wrap(payload, 0, 4).putInt(messageBytes.length);
@@ -111,33 +111,10 @@ public class Client {
         return data;
     }
 
-//    public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-//        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + reader.readLine());
-//        Message message = tClass.newInstance();
-//        Field[] fields = tClass.getDeclaredFields();
-//        while (true) {
-//            final String line = reader.readLine();
-//            if (line.isEmpty()) break;
-//            Optional<Field> optionalField = Arrays.stream(fields).filter(f -> line.startsWith(f.getName())).findAny();
-//            if (!optionalField.isPresent())
-//                continue;
-//            Field field = optionalField.get();
-//            field.set(message, field.getType().cast(line.substring(field.getName().length())));
-//        }
-//        return message;
-//    }
-//
-//    public void sendMessage(Message message) throws IOException, IllegalAccessException {
-//        writer.write(message.getClass().getSimpleName() + "\r\n");
-//        Field[] fields = message.getClass().getDeclaredFields();
-//        for (Field field : fields)
-//            writer.write(field.getName() + "=" + field.get(message).toString() + "\r\n");
-//        writer.write("\r\n");
-//        writer.flush();
-//    }
-
     public void close() {
         try {
+            is.close();
+            os.close();
             clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();

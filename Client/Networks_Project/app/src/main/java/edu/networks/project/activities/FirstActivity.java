@@ -2,12 +2,14 @@ package edu.networks.project.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import edu.networks.project.MySocket;
 import edu.networks.project.R;
+import edu.networks.project.messages.LoginResponse;
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -15,6 +17,18 @@ public class FirstActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
+
+        try {
+            LoginResponse response = new LoginResponse();
+            response.status = 1;
+            byte[] bytes = response.serializeToByteArray();
+            response = new LoginResponse();
+            response.parseFromByteArray(bytes);
+            Log.e("SOCKETS", "status " + response.status);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
     }
 

@@ -2,46 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6b92d1e-afc5-4e22-aecc-50865a600d2d" name="Default Changelist" comment="finalized client login and registration">
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/ClientServerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/ClientServerActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/RegistrationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/RegistrationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationComponent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/dagger/ApplicationModule.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/ExitRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/ExitResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/LoginRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/LoginResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/Message.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/P2PDownloadRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/P2PDownloadResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/RegistrationRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/RegistrationResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/server/P2PServerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/MySocket1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/FirstActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/activities/FirstActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/ExitRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/ExitRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/ExitResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/ExitResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/FileUploadRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/FileUploadRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/FileUploadResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/FileUploadResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/MessageInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/Message1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/RegistrationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/RegistrationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/RegistrationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/RegistrationResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/UserInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/messages/UserInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/RegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/RegistrationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/java/edu/networks/project/services/Service.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_registration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/activity_registration.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/content_client_server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/layout/content_client_server.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/Networks_Project/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ClientServerDownload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/ClientServerUpload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/services/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/files/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/files/FileManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/ClientServerUpload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/ClientServerUpload.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Service.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/services/Service.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/services/ClientServerDownload.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/services/ClientServerDownload.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -201,6 +184,7 @@
       <workItem from="1576085740702" duration="1526000" />
       <workItem from="1576096680971" duration="621000" />
       <workItem from="1576097485437" duration="4518000" />
+      <workItem from="1576129512061" duration="3228000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1576063866052</created>

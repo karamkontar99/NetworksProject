@@ -1,9 +1,10 @@
 package edu.networks.project.messages;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class LoginResponse implements Message {
+public class LoginResponse implements MessageInterface {
 	public int status;
 
 	@Override

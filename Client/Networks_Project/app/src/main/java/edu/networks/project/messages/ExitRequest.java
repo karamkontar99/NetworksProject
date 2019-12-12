@@ -1,6 +1,6 @@
 package edu.networks.project.messages;
 
-public class ExitRequest implements Message {
+public class ExitRequest implements MessageInterface {
 
     public EMsg getEMsg()
     {

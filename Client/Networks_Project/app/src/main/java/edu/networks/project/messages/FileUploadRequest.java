@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileUploadRequest implements Message {
+public class FileUploadRequest implements MessageInterface {
     public int fileSize;
     public String fileName;
     public byte[] data;

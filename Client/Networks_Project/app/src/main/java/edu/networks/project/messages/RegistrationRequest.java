@@ -2,9 +2,10 @@ package edu.networks.project.messages;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.text.StringCharacterIterator;
 import java.util.Arrays;
 
-public class RegistrationRequest implements Message {
+public class RegistrationRequest implements MessageInterface {
     public String username;
     public String password;
     public String name;

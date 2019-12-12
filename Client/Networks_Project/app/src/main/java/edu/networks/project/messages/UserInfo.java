@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class UserInfo implements Message {
+public class UserInfo implements MessageInterface {
 	public String id;
 	public String name;
 	public String address;

@@ -10,9 +10,6 @@ public class Main {
         EasyDI context = new EasyDI();
 
         int port = 5050;
-        try {
-            port = Integer.parseInt(args[1]);
-        } catch (Exception ignored){}
 
         Application application = context.getInstance(Application.class);
         application.run(port);

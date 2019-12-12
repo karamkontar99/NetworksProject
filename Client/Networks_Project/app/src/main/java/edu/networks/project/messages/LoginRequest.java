@@ -1,10 +1,11 @@
 package edu.networks.project.messages;
 
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class LoginRequest implements Message {
+public class LoginRequest implements MessageInterface {
     public String username;
     public String password;
 

@@ -1,8 +1,8 @@
 package edu.networks.project;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 
@@ -12,7 +12,7 @@ import edu.networks.project.messages.FileUploadRequest;
 import edu.networks.project.messages.FileUploadResponse;
 import edu.networks.project.messages.LoginRequest;
 import edu.networks.project.messages.LoginResponse;
-import edu.networks.project.messages.Message;
+import edu.networks.project.messages.MessageInterface;
 import edu.networks.project.messages.RegistrationRequest;
 import edu.networks.project.messages.RegistrationResponse;
 import edu.networks.project.messages.UserInfo;
@@ -21,16 +21,16 @@ public class MySocket {
     private static String serverIp;
 
     private final Socket socket;
-    private final InputStream is;
-    private final OutputStream os;
+    private final DataInputStream is;
+    private final DataOutputStream os;
 
     public MySocket() throws IOException {
         this.socket = new Socket(serverIp, 5050);
-        this.is = socket.getInputStream();
-        this.os = socket.getOutputStream();
+        this.is = new DataInputStream(socket.getInputStream());
+        this.os = new DataOutputStream(socket.getOutputStream());
     }
 
-    public Message readMessage() throws Exception {
+    public MessageInterface readMessage() throws Exception {
         // first we read the first 4 bytes to get the message size
         byte[] sizeB = this.blockingRead(4);
         int size = ByteBuffer.wrap(sizeB).getInt();
@@ -41,7 +41,7 @@ public class MySocket {
         // Read the rest of the message
         byte[] data = this.blockingRead(size);
 
-        Message message = null;
+        MessageInterface message = null;
 
         // TODO: Might be better to setup an EnumMap that
         // maps the enum to class name
@@ -86,12 +86,12 @@ public class MySocket {
             default:
                 throw new Exception("Unknown EMsg");
         }
+        message.parseFromByteArray(data);
         return message;
     }
 
-    public void sendMessage(Message message) throws Exception {
+    public void sendMessage(MessageInterface message) throws Exception {
         byte[] messageBytes = message.serializeToByteArray();
-
         byte[] payload = new byte[8 + messageBytes.length];
 
         ByteBuffer.wrap(payload, 0, 4).putInt(messageBytes.length);
@@ -116,41 +116,13 @@ public class MySocket {
         return data;
     }
 
-//    public Message readMessage() throws IOException, IllegalAccessException, InstantiationException, ClassNotFoundException {
-//        Class<Message> tClass = (Class<Message>) Class.forName(Message.class.getPackage().getName() + reader.readLine());
-//        Message message = tClass.newInstance();
-//        Field[] fields = tClass.getDeclaredFields();
-//        while (true) {
-//            final String line = reader.readLine();
-//            if (line.isEmpty()) break;
-//            Optional<Field> optionalField = Arrays.stream(fields).filter(f -> line.startsWith(f.getName())).findAny();
-//            if (!optionalField.isPresent())
-//                continue;
-//            Field field = optionalField.get();
-//            field.set(message, field.getType().cast(line.substring(field.getName().length())));
-//        }
-//        return message;
-//    }
-//
-//    public void sendMessage(Message message) throws IOException, IllegalAccessException {
-//        writer.write(message.getClass().getSimpleName() + "\r\n");
-//        Field[] fields = message.getClass().getDeclaredFields();
-//        for (Field field : fields)
-//            writer.write(field.getName() + "=" + field.get(message).toString() + "\r\n");
-//        writer.write("\r\n");
-//        writer.flush();
-//    }
-
+    
     public void close() {
         try {
             socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static String getServerIp() {
-        return serverIp;
     }
 
     public static void setServerIp(String serverIp) {
