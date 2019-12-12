@@ -27,9 +27,6 @@ public class FileDownloadRequest implements MessageInterface {
         this.fileName = fileName;
     }
 
-
-
-
     public byte[] serializeToByteArray() {
 
         int index = 0;
@@ -39,9 +36,7 @@ public class FileDownloadRequest implements MessageInterface {
         System.arraycopy(fileNameBytes, 0, bytes, index, fileName.length());
         index += fileName.length();
 
-
         return bytes;
-
     }
 
 
