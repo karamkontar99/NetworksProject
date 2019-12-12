@@ -1,39 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e6b92d1e-afc5-4e22-aecc-50865a600d2d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Application.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Client.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/RequestHandler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/RequestHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/files/FileManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/EMsg.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/ExitRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/ExitResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/FileDownloadRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/FileDownloadResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/FileListRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/FileUploadRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/FileUploadResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/LoginResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/Message.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/MessageInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/RegistrationRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/RegistrationResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/messages/UserInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/models/Document.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/models/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/DBConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/DocumentRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/Repository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/repos/UserRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/LoginService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/services/Service.class" beforeDir="false" />
-    </list>
+    <list default="true" id="e6b92d1e-afc5-4e22-aecc-50865a600d2d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +162,7 @@
       <workItem from="1576097485437" duration="4518000" />
       <workItem from="1576129512061" duration="5045000" />
       <workItem from="1576135057042" duration="6458000" />
+      <workItem from="1576144201426" duration="335000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <created>1576063866052</created>
@@ -237,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576132881013</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="commit before pull">
+      <created>1576144357299</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1576144357299</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
