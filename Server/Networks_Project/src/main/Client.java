@@ -70,17 +70,23 @@ public class Client {
                 message = new FileUploadResponse();
                 break;
             case 8:
+                message = new FileDownloadRequest();
+                break;
+            case 9:
+                message = new FileDownloadResponse();
+                break;
+            case 10:
                 // Process ExitRequest
                 message = new ExitRequest();
                 break;
-            case 9:
+            case 11:
                 // Process ExitResponse
                 message = new ExitResponse();
                 break;
-            case 10:
+            case 12:
                 message = new FileListRequest();
                 break;
-            case 11:
+            case 13:
                 message = new FileListResponse();
                 break;
 
@@ -94,6 +100,7 @@ public class Client {
             default:
                 throw new Exception("Unknown EMsg");
         }
+        message.parseFromByteArray(data);
         return message;
     }
 

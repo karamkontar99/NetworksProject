@@ -28,6 +28,8 @@ public class FileDownloadRequest implements MessageInterface {
     }
 
 
+
+
     public byte[] serializeToByteArray() {
 
         int index = 0;
