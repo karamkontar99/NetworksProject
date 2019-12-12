@@ -1,8 +1,6 @@
 package main.files;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,10 +19,19 @@ public class FileManager {
         return Arrays.asList(Objects.requireNonNull(dir.list())).contains(name);
     }
 
-    public void createFile(String name) throws IOException {
+
+    public void createFile(String name, byte[] content) throws IOException {
         File file = new File(getPath(name));
         assert file.createNewFile();
+
+        try {
+            OutputStream os = new FileOutputStream(file);
+            os.write(content);
+            os.close();
+        } catch (Exception e) {
+        }
     }
+
 
     public File getFile(String name) throws FileNotFoundException {
         File file = new File(getPath(name));
@@ -33,15 +40,15 @@ public class FileManager {
         return file;
     }
 
+    private String getPath(String name) {
+        return FILE_DIR + File.separator + name;
+    }
+
     public List<File> getAllFiles() {
         List<File> files = new ArrayList<>();
         File[] dirFiles = dir.listFiles();
         if (dirFiles != null)
             files = Arrays.asList(dirFiles);
         return files;
-    }
-
-    private String getPath(String name) {
-        return FILE_DIR + File.separator + name;
     }
 }

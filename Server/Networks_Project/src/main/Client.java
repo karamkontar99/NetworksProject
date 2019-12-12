@@ -89,14 +89,6 @@ public class Client {
             case 13:
                 message = new FileListResponse();
                 break;
-
-            case 12:
-                message = new FileDownloadRequest();
-                break;
-
-            case 13:
-                message = new FileDownloadResponse();
-                break;
             default:
                 throw new Exception("Unknown EMsg");
         }

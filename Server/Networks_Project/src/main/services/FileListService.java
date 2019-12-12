@@ -2,6 +2,7 @@ package main.services;
 
 import main.files.FileManager;
 import main.messages.FileListRequest;
+import main.messages.FileListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +14,8 @@ public class FileListService {
         this.fileManager = fileManager;
     }
 
-    public FileListRequest execute(FileListRequest request) {
-        FileListRequest response = new FileListRequest();
+    public FileListResponse execute(FileListRequest request) {
+        FileListResponse response = new FileListResponse();
 
         List<String> names = new ArrayList<>();
         List<Integer> sizes = new ArrayList<>();

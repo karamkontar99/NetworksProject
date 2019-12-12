@@ -1,9 +1,7 @@
 package main;
 
 import main.messages.*;
-import main.services.ClientServerUpload;
-import main.services.LoginService;
-import main.services.RegistrationService;
+import main.services.*;
 import services.ClientServerDownload;
 
 import java.io.IOException;
@@ -14,12 +12,18 @@ public class RequestHandler extends Thread {
     private final RegistrationService registrationService;
     private final ClientServerUpload clientServerUpload;
     private final ClientServerDownload clientServerDownload;
+    private final FileDownloadService fileUploadService;
+    private final FileDownloadService fileDownloadService;
+    private final FileListService fileListService;
 
-    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload) {
+    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload, FileDownloadService fileUploadService, FileDownloadService fileDownloadService, FileListService fileListService) {
         this.loginService = loginService;
         this.registrationService = registrationService;
         this.clientServerUpload = clientServerUpload;
         this.clientServerDownload = clientServerDownload;
+        this.fileUploadService = fileUploadService;
+        this.fileDownloadService = fileDownloadService;
+        this.fileListService = fileListService;
     }
 
     private Client client;
@@ -40,18 +44,18 @@ public class RequestHandler extends Thread {
                     response = loginService.execute((LoginRequest) msg);
                     break;
                 case ERegistrationRequest:
-                    response = RegistrationService.execute((RegistrationRequest) msg);
+                    response = registrationService.execute((RegistrationRequest) msg);
                     break;
                 case EFileUploadRequest:
-                    response = FileUploadService.execute((FileUploadRequest) msg);
+                    response = fileUploadService.execute((FileUploadRequest) msg);
                     break;
                 case EExistRequest:
                     break;
                 case EFileListRequest:
-                    response = loginService.execute((LoginRequest) msg);
+                    response = fileListService.execute((FileListRequest) msg);
                     break;
                 case EFileDownloadRequest:
-                    response = FileDownloadService.execute((FileDownloadRequest) msg);
+                    response = fileDownloadService.execute((FileDownloadRequest) msg);
                     break;
             }
             client.sendMessage(response);

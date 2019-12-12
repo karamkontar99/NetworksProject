@@ -11,7 +11,7 @@ public class FileUploadService implements Service<FileUploadRequest, FileUploadR
         this.fileManager = fileManager;
     }
 
-    public  FileUploadResponse execute(FileUploadRequest request) {
+    public FileUploadResponse execute(FileUploadRequest request) {
         FileUploadResponse response;
         response = new FileUploadResponse();
 
