@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileDownloadResponse {
+public class FileDownloadResponse implements MessageInterface {
     public int id;
     public int status;
     public int fileSize;
@@ -47,6 +47,11 @@ public class FileDownloadResponse {
         this.fileSize = fileSize;
         this.fileName = fileName;
         this.data = dataB;
+    }
+
+    @Override
+    public EMsg getEMsg() {
+        return null;
     }
 
     public byte[] serializeToByteArray() {

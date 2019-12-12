@@ -1,19 +1,26 @@
 package edu.networks.project.messages;
 
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+
 public class FileListRequest implements MessageInterface {
+
+    public int status;
 
     @Override
     public EMsg getEMsg() {
-        return null;
+        return EMsg.EFileUploadResponse;
     }
 
-    @Override
+    public void parseFromByteArray(byte[] bytes) throws Exception {
+        byte[] statusB = Arrays.copyOfRange(bytes, 0, 4);
+        int status = ByteBuffer.wrap(statusB).getInt();
+        this.status = status;
+    }
+
     public byte[] serializeToByteArray() {
-        return new byte[0];
-    }
-
-    @Override
-    public void parseFromByteArray(byte[] array) throws Exception {
-
+        byte[] bytes = new byte[4];
+        ByteBuffer.wrap(bytes, 0, 4).putInt(status);
+        return bytes;
     }
 }

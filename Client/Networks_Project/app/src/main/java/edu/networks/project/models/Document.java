@@ -3,10 +3,12 @@ package edu.networks.project.models;
 public class Document {
     private String name;
     private int size;
+    private boolean downloaded;
 
-    public Document(String name, int size) {
+    public Document(String name, int size, boolean downloaded) {
         this.name = name;
         this.size = size;
+        this.downloaded = downloaded;
     }
 
     public String getName() {
@@ -25,4 +27,11 @@ public class Document {
         this.size = size;
     }
 
+    public boolean isDownloaded() {
+        return downloaded;
+    }
+
+    public void setDownloaded(boolean downloaded) {
+        this.downloaded = downloaded;
+    }
 }

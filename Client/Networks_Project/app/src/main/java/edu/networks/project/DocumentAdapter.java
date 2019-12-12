@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -52,16 +53,19 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
 
     class DocumentViewHolder extends RecyclerView.ViewHolder {
         private TextView fileName, fileSize;
+        private ImageView downloaded;
 
         public DocumentViewHolder(@NonNull View itemView) {
             super(itemView);
             fileName = itemView.findViewById(R.id.textView_document_name);
             fileSize = itemView.findViewById(R.id.textView_document_size);
+            downloaded = itemView.findViewById(R.id.imageView_downloaded);
         }
 
         public void bind(Document document) {
             fileName.setText(document.getName());
             fileSize.setText(document.getSize() + "B");
+            downloaded.setVisibility(document.isDownloaded() ? View.VISIBLE : View.INVISIBLE);
         }
     }
 

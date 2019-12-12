@@ -1,18 +1,11 @@
 package edu.networks.project.activities;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.util.List;
@@ -21,8 +14,10 @@ import java.util.stream.Collectors;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import edu.networks.project.BuildConfig;
 import edu.networks.project.R;
 import edu.networks.project.files.FileManager;
 
@@ -57,57 +52,6 @@ public class LocalFilesActivity extends AppCompatActivity {
 
         setupSearchView();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(view -> {
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("*/*");
-            startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
-        });
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CHOOSE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
-            String filePath = data.getDataString();
-            File file = new File(filePath);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(LocalFilesActivity.this);
-            builder.setTitle("Choose file name");
-
-            final EditText input = new EditText(builder.getContext());
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            input.setText(file.getName());
-            builder.setView(input);
-
-            builder.setPositiveButton("OK", (dialog, i) -> {
-                String fileName = input.getText().toString();
-                if (!file.getName().equals(fileName)) {
-                    if (fileName.isEmpty()) {
-                        input.setError("cannot be empty");
-                        return;
-                    }
-                    if (fileManager.hasFile(fileName)) {
-                        input.setError("file name already exists");
-                        return;
-                    }
-                    try {
-                        fileManager.addFile(fileName, file);
-                        mAllFiles = mFiles = fileManager.getAllFiles();
-                        mSearchView.setQuery("", false);
-                        mAdapter.notifyDataSetChanged();
-                    } catch (Exception e) {
-                        Snackbar.make(mSearchView, "an error occurred", Snackbar.LENGTH_SHORT).show();
-                    }
-                }
-                dialog.dismiss();
-            });
-
-            builder.setNegativeButton("Cancel", (dialog, i) -> {
-                dialog.dismiss();
-            });
-
-            builder.show();
-        }
     }
 
     private void setupSearchView(){
@@ -127,7 +71,6 @@ public class LocalFilesActivity extends AppCompatActivity {
 
     }
 
-
     private class FileViewHolder extends RecyclerView.ViewHolder {
         private TextView mFileName, mFilePath;
 
@@ -141,58 +84,13 @@ public class LocalFilesActivity extends AppCompatActivity {
             mFileName.setText(file.getName());
             mFilePath.setText(file.getAbsolutePath());
 
-            itemView.setOnLongClickListener(view -> {
+            itemView.setOnClickListener(view -> {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.fromFile(file));
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri uri = FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID + ".provider", file);
+                intent.setData(uri);
                 Intent chooserIntent = Intent.createChooser(intent, "Choose an application to open");
                 startActivity(chooserIntent);
-                return true;
-            });
-
-            itemView.setOnClickListener(view -> {
-                AlertDialog.Builder builder = new AlertDialog.Builder(LocalFilesActivity.this);
-                builder.setTitle("Choose an action");
-                builder.setMessage("What do you want to do with file");
-
-                final EditText input = new EditText(builder.getContext());
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                input.setText(file.getName());
-                builder.setView(input);
-
-                builder.setPositiveButton("OK", (dialog, i) -> {
-                    Log.d("ERRORS", "loading file");
-                    String fileName = input.getText().toString();
-                    if (!file.getName().equals(fileName)) {
-                        if (fileName.isEmpty()) {
-                            input.setError("cannot be empty");
-                            return;
-                        }
-                        if (fileManager.hasFile(fileName)) {
-                            input.setError("file name already exists");
-                            return;
-                        }
-                        try {
-                            fileManager.renameFile(file.getName(), fileName);
-                            mAllFiles = fileManager.getAllFiles();
-                            mSearchView.setQuery("", true);
-                        } catch (Exception e) {
-                            Log.d("ERRORS", "error occured " + e.getMessage());
-                            e.printStackTrace();
-                            Snackbar.make(mSearchView, "an error occurred", Snackbar.LENGTH_LONG).show();
-                        }
-                    }
-                    dialog.dismiss();
-                });
-
-                builder.setNegativeButton("Delete", (dialog, i) -> {
-                    fileManager.removeFile(file.getName());
-                    mAllFiles = mFiles = fileManager.getAllFiles();
-                    mSearchView.setQuery("", false);
-                    mAdapter.notifyDataSetChanged();
-                    dialog.dismiss();
-                });
-
-                builder.show();
             });
         }
     }

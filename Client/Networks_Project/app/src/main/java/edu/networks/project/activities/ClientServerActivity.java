@@ -76,7 +76,8 @@ public class ClientServerActivity extends AppCompatActivity {
             startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
         });
 
-        new LoadDocuments().execute();
+        FileListRequest request = new FileListRequest();
+        new LoadDocuments().execute(request);
     }
 
     private class LoadDocuments extends AsyncTask<FileListRequest, Void, FileListResponse> {
@@ -96,10 +97,12 @@ public class ClientServerActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(FileListResponse fileListResponse) {
-            super.onPostExecute(fileListResponse);
+        protected void onPostExecute(FileListResponse response) {
+            super.onPostExecute(response);
             progressBar.setVisibility(View.GONE);
-            List<Document> documents = new ArrayList<>();
+            List<Document> documents = new ArrayList<>(response.size);
+            for (int i = 0; i < response.size; i++)
+                documents.add(new Document(response.names.get(i), response.sizes.get(i), fileManager.hasFile(response.names.get(i))));
             adapter.setDocuments(documents);
         }
     }
@@ -123,6 +126,10 @@ public class ClientServerActivity extends AppCompatActivity {
                     String fileName = input.getText().toString();
                     if (fileName.isEmpty()) {
                         input.setError("cannot be empty");
+                        return;
+                    }
+                    if (fileManager.hasFile(fileName)) {
+                        input.setError("filename exists");
                         return;
                     }
                     FileProgressNotification notification = new FileProgressNotification(getApplicationContext(), fileName, false);
@@ -188,15 +195,23 @@ public class ClientServerActivity extends AppCompatActivity {
 
     private void setupAdapter() {
         adapter.setOnDocumentClickListener(((document, index) -> {
+            if (document.isDownloaded()) {
+                Snackbar.make(progressBar, "file already downloaded", Snackbar.LENGTH_SHORT).show();
+                return;
+            }
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Download File");
 
-            builder.setPositiveButton("OK", (dialog, i) -> {
-
+            builder.setPositiveButton("Yes", (dialog, i) -> {
+                FileDownloadRequest request = new FileDownloadRequest();
+                request.fileName = document.getName();
+                FileProgressNotification notification = new FileProgressNotification(getApplicationContext(), document.getName(), true);
+                new FileDownloadThread(request, notification);
                 dialog.dismiss();
             });
 
-            builder.setNegativeButton("Cancel", (dialog, i) -> {
+            builder.setNegativeButton("No", (dialog, i) -> {
                 dialog.dismiss();
             });
 

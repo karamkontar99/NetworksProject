@@ -1,7 +1,6 @@
 package edu.networks.project.files;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
@@ -16,7 +15,7 @@ public class FileManager {
     private File dir;
 
     public FileManager(Context context) {
-        dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), DIR_NAME);
+        dir = new File(context.getFilesDir(), DIR_NAME);
         assert dir.exists() || dir.mkdir();
         Log.e("SOCKETS", "dir null? " + (dir == null));
     }
