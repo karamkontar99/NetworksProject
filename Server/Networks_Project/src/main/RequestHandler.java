@@ -1,11 +1,9 @@
 package main;
 
-import main.messages.LoginRequest;
-import main.messages.MessageInterface;
-import main.services.ClientServerUpload;
+import main.messages.*;
+import main.services.FileUploadService;
 import main.services.LoginService;
 import main.services.RegistrationService;
-import services.ClientServerDownload;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -13,14 +11,14 @@ import java.net.Socket;
 public class RequestHandler extends Thread {
     private final LoginService loginService;
     private final RegistrationService registrationService;
-    private final ClientServerUpload clientServerUpload;
-    private final ClientServerDownload clientServerDownload;
+    private final FileUploadService fileUploadService;
+    private final services.FileDownloadService fileDownloadService;
 
-    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload) {
+    public RequestHandler(LoginService loginService, RegistrationService registrationService, FileUploadService fileUploadService, services.FileDownloadService fileDownloadService) {
         this.loginService = loginService;
         this.registrationService = registrationService;
-        this.clientServerUpload = clientServerUpload;
-        this.clientServerDownload = clientServerDownload;
+        this.fileUploadService = fileUploadService;
+        this.fileDownloadService = fileDownloadService;
     }
 
     private Client client;
@@ -34,25 +32,26 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             MessageInterface msg = client.readMessage();
-            MessageInterface response = null;
+            MessageInterface response;
 
             switch (msg.getEMsg()) {
                 case ELoginRequest:
                     response = loginService.execute((LoginRequest) msg);
+                    client.sendMessage(response);
                     break;
                 case ERegistrationRequest:
+                    response = FileUploadService.execute((FileUploadRequest) msg);
+                    client.sendMessage(response);
                     break;
                 case EFileUploadRequest:
                     break;
-                default:
+                case EExistRequest:
                     break;
             }
-
-            client.sendMessage(response);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-//            client.close();
+            client.close();
         }
     }
 
