@@ -25,13 +25,7 @@ public class FileListResponse implements  MessageInterface{
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
 
-        /*
-        First 4 bytes is the status
-        first 4 bytes are the length (number of items) of the list
-        then every set of bytes is the length of the name then the name then the filezise (4 bytes)
-        */
-
-        this.status = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+        this.status = ByteBuffer.wrap(bytes, index, 4).getInt();
         index += 4;
 
         if (this.status != 1) {
@@ -39,16 +33,16 @@ public class FileListResponse implements  MessageInterface{
             return;
         }
 
-        int count = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+        int count = ByteBuffer.wrap(bytes, index, 4).getInt();
         index += 4;
 
         for (int i = 0; i < count; i++) {
             // first read the first 4 bytes to get the file size
             // then read the next 4 bytes to get the string length
             // then read the string
-            int size = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+            int size = ByteBuffer.wrap(bytes, index, 4).getInt();
             index += 4;
-            int fileNameLength = ByteBuffer.wrap(bytes, index, index + 4).getInt();
+            int fileNameLength = ByteBuffer.wrap(bytes, index, 4).getInt();
             index += 4;
             String fileName = new String(bytes, index, fileNameLength, StandardCharsets.US_ASCII);
             index += fileNameLength;
@@ -78,7 +72,7 @@ public class FileListResponse implements  MessageInterface{
             neededBytes += 4 + 4 + this.names.get(i).length();
         }
 
-        bytes = new byte[4 + 4 + neededBytes];
+        bytes = new byte[neededBytes];
 
         ByteBuffer.wrap(bytes, index, 4).putInt(this.status);
         index += 4;
@@ -90,7 +84,7 @@ public class FileListResponse implements  MessageInterface{
         for (int i = 0; i < this.names.size(); i++) {
             ByteBuffer.wrap(bytes, index, 4).putInt(this.sizes.get(i));
             index += 4;
-            ByteBuffer.wrap(bytes, index, index + 4).putInt(this.names.get(i).length());
+            ByteBuffer.wrap(bytes, index, 4).putInt(this.names.get(i).length());
             index += 4;
             System.arraycopy(this.names.get(i).getBytes(StandardCharsets.US_ASCII), 0, bytes, index, this.names.get(i).length());
             index += this.names.get(i).length();

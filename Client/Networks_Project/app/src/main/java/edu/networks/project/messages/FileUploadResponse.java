@@ -1,6 +1,7 @@
 package edu.networks.project.messages;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class FileUploadResponse implements MessageInterface {

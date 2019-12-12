@@ -1,13 +1,20 @@
 package edu.networks.project;
 
+import android.util.Log;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import edu.networks.project.messages.ExitRequest;
 import edu.networks.project.messages.ExitResponse;
+import edu.networks.project.messages.FileDownloadRequest;
+import edu.networks.project.messages.FileDownloadResponse;
+import edu.networks.project.messages.FileListRequest;
+import edu.networks.project.messages.FileListResponse;
 import edu.networks.project.messages.FileUploadRequest;
 import edu.networks.project.messages.FileUploadResponse;
 import edu.networks.project.messages.LoginRequest;
@@ -82,16 +89,29 @@ public class MySocket {
                 message = new FileUploadResponse();
                 break;
             case 8:
-                // Process ExitRequest
                 message = new ExitRequest();
                 break;
             case 9:
-                // Process ExitResponse
                 message = new ExitResponse();
+                break;
+            case 10:
+                message = new FileListRequest();
+                break;
+            case 11:
+                message = new FileListResponse();
+                break;
+            case 12:
+                message = new FileDownloadRequest();
+                break;
+            case 13:
+                message = new FileDownloadResponse();
                 break;
             default:
                 throw new Exception("Unknown EMsg");
         }
+
+        Log.e("SOCKETS", "received " + Arrays.toString(data));
+
         message.parseFromByteArray(data);
         return message;
     }

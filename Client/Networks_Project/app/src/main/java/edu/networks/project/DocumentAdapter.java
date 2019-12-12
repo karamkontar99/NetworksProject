@@ -20,7 +20,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.Docume
 
     public void setDocuments(List<Document> documents) {
         this.documents = documents;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     public void setOnDocumentClickListener(OnDocumentClickListener listener) {

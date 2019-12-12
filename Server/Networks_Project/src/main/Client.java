@@ -8,8 +8,13 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client {
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
+
     private final Socket clientSocket;
     private final InputStream is;
     private final OutputStream os;
@@ -70,28 +75,28 @@ public class Client {
                 message = new FileUploadResponse();
                 break;
             case 8:
-                message = new FileDownloadRequest();
-                break;
-            case 9:
-                message = new FileDownloadResponse();
-                break;
-            case 10:
-                // Process ExitRequest
                 message = new ExitRequest();
                 break;
-            case 11:
-                // Process ExitResponse
+            case 9:
                 message = new ExitResponse();
                 break;
-            case 12:
+            case 10:
                 message = new FileListRequest();
                 break;
-            case 13:
+            case 11:
                 message = new FileListResponse();
+                break;
+            case 12:
+                message = new FileDownloadRequest();
+                break;
+            case 13:
+                message = new FileDownloadResponse();
                 break;
             default:
                 throw new Exception("Unknown EMsg");
         }
+        logger.log(Level.INFO, "read " + Arrays.toString(data));
+
         message.parseFromByteArray(data);
         return message;
     }
@@ -107,6 +112,8 @@ public class Client {
 
         os.write(payload);
         os.flush();
+
+        logger.log(Level.INFO, "wrote " + Arrays.toString(payload));
     }
 
     public byte[] blockingRead(int size) throws Exception {

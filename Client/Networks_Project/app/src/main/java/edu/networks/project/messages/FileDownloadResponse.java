@@ -5,24 +5,24 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class FileDownloadResponse implements MessageInterface {
-    public int id;
     public int status;
     public int fileSize;
     public String fileName;
     public byte[] data;
 
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.EFileDownloadResponse;
+    }
     public void parseFromByteArray(byte[] bytes) throws Exception {
         int index = 0;
 
-        byte[] idB = Arrays.copyOfRange(bytes, index, index + 4);
-        int id = ByteBuffer.wrap(bytes, index, index + 4).getInt();
-
+        this.status = ByteBuffer.wrap(bytes, index, 4).getInt();
         index += 4;
 
-        byte[] statusB = Arrays.copyOfRange(bytes, index, index + 4);
-        int status = ByteBuffer.wrap(bytes, index, index + 4).getInt();
-
-        index += 4;
+        if (this.status != 1) {
+            return;
+        }
 
         byte[] filseSizeB = Arrays.copyOfRange(bytes, index, index + 4);
         int fileSize = ByteBuffer.wrap(bytes, index, index + 4).getInt();
@@ -42,32 +42,28 @@ public class FileDownloadResponse implements MessageInterface {
         byte[] dataB = Arrays.copyOfRange(bytes, index, index + datalength);
         index += datalength;
 
-        this.id = id;
-        this.status = status;
         this.fileSize = fileSize;
         this.fileName = fileName;
         this.data = dataB;
     }
 
-    @Override
-    public EMsg getEMsg() {
-        return null;
-    }
-
     public byte[] serializeToByteArray() {
 
         int index = 0;
-        byte[] bytes = new byte[4 + 4 + 4 +4 +4 + fileSize + fileName.length() + data.length +id+status];
-        // first 4 bytes should be usernameLength
+        byte[] bytes = null;
 
-        ByteBuffer.wrap(bytes, 0, 4).putInt(id);
+        if (status != 1) {
+            bytes = new byte[4];
+            ByteBuffer.wrap(bytes).putInt(status);
+            return bytes;
+        }
+
+        bytes = new byte[4 + 4 + 4 + 4 + fileName.length() + data.length];
+
+        ByteBuffer.wrap(bytes, index, 4).putInt(status);
         index += 4;
 
-        ByteBuffer.wrap(bytes, 0, 4).putInt(status);
-        index += 4;
-
-
-        ByteBuffer.wrap(bytes, 0, 4).putInt(fileSize);
+        ByteBuffer.wrap(bytes, index, 4).putInt(fileSize);
         index += 4;
 
         ByteBuffer.wrap(bytes, index, 4).putInt(fileName.length());

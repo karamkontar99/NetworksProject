@@ -10,6 +10,7 @@ public class FileDownloadResponse implements MessageInterface {
     public String fileName;
     public byte[] data;
 
+
     @Override
     public EMsg getEMsg() {
         return EMsg.EFileDownloadResponse;

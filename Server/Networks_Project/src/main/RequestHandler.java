@@ -2,7 +2,6 @@ package main;
 
 import main.messages.*;
 import main.services.*;
-import services.ClientServerDownload;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -10,17 +9,13 @@ import java.net.Socket;
 public class RequestHandler extends Thread {
     private final LoginService loginService;
     private final RegistrationService registrationService;
-    private final ClientServerUpload clientServerUpload;
-    private final ClientServerDownload clientServerDownload;
-    private final FileDownloadService fileUploadService;
+    private final FileUploadService fileUploadService;
     private final FileDownloadService fileDownloadService;
     private final FileListService fileListService;
 
-    public RequestHandler(LoginService loginService, RegistrationService registrationService, ClientServerUpload clientServerUpload, ClientServerDownload clientServerDownload, FileDownloadService fileUploadService, FileDownloadService fileDownloadService, FileListService fileListService) {
+    public RequestHandler(LoginService loginService, RegistrationService registrationService, FileUploadService fileUploadService, FileDownloadService fileDownloadService, FileListService fileListService) {
         this.loginService = loginService;
         this.registrationService = registrationService;
-        this.clientServerUpload = clientServerUpload;
-        this.clientServerDownload = clientServerDownload;
         this.fileUploadService = fileUploadService;
         this.fileDownloadService = fileDownloadService;
         this.fileListService = fileListService;

@@ -5,8 +5,11 @@ import main.messages.FileDownloadRequest;
 import main.messages.FileDownloadResponse;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileDownloadService implements Service<FileDownloadRequest, FileDownloadResponse> {
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
 
     private final FileManager fileManager;
 
@@ -18,6 +21,8 @@ public class FileDownloadService implements Service<FileDownloadRequest, FileDow
     @Override
     public FileDownloadResponse execute(FileDownloadRequest message) {
         // save the file on the local storage
+        logger.log(Level.INFO, "file download request for " + message.fileName);
+
         FileDownloadResponse response = new FileDownloadResponse();
 
         String fileName = message.fileName;

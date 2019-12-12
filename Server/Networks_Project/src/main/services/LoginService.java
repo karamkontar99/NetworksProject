@@ -24,11 +24,10 @@ public class LoginService implements Service<LoginRequest, LoginResponse> {
         User user = userRepository.login(request.username, request.password);
 
         response = new LoginResponse();
-        if (false || user == null) {
+        if (user == null) {
             response.status = 0;
         }
         else {
-//            response = mapper.map(user, LoginResponse.class);
             response.status = 1;
         }
 

@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -22,8 +22,6 @@ import edu.networks.project.R;
 import edu.networks.project.files.FileManager;
 
 public class LocalFilesActivity extends AppCompatActivity {
-
-    private final int CHOOSE_FILE_REQUEST_CODE = 100;
 
     private FileManager fileManager;
 
@@ -63,7 +61,10 @@ public class LocalFilesActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String query) {
-                mFiles = mAllFiles.stream().filter(file -> query.isEmpty() || file.getName().toLowerCase().equals(query.toLowerCase())).collect(Collectors.toList());
+                mFiles = new ArrayList<>();
+                for (File file : mAllFiles)
+                    if (file.getName().toLowerCase().contains(query.toLowerCase()))
+                        mFiles.add(file);
                 mAdapter.notifyDataSetChanged();
                 return true;
             }

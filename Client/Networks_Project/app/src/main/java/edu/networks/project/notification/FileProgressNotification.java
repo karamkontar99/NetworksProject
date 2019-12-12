@@ -2,12 +2,8 @@ package edu.networks.project.notification;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-
-import java.io.File;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
@@ -20,7 +16,7 @@ public class FileProgressNotification {
     private final String fileName;
     private final boolean isDownload;
 
-    public FileProgressNotification(Context context, String fileName, boolean isDownload) {
+    public FileProgressNotification(Context context, final String fileName, boolean isDownload) {
         this.context = context;
         this.fileName = fileName;
         this.isDownload = isDownload;
@@ -44,6 +40,8 @@ public class FileProgressNotification {
     }
 
     public void updateNotification(int size, int total) {
+        Log.e("SOCKETS", "updating notification");
+
         builder.setContentText((isDownload ? "downloading" : "uploading") + " " + size + "/" + total + "B")
                 .setProgress(100, size * 100 / total, false)
                 .setOngoing(true);
@@ -52,6 +50,8 @@ public class FileProgressNotification {
     }
 
     public void failNotification() {
+        Log.e("SOCKETS", "failing notification");
+
         builder.setContentTitle("Error: " + fileName)
                 .setContentTitle("There was a problem transferring your file")
                 .setSmallIcon(android.R.drawable.stat_sys_warning)
@@ -60,23 +60,14 @@ public class FileProgressNotification {
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 
-    public void finishNotification(File file) {
+    public void finishNotification() {
+        Log.e("SOCKETS", "finishing notification");
+
         builder.setContentTitle("Complete: " + fileName)
                 .setContentTitle("The file transfer completed successfully")
                 .setSmallIcon(isDownload ? android.R.drawable.stat_sys_download_done : android.R.drawable.stat_sys_upload_done)
                 .setOngoing(false)
                 .setAutoCancel(true);
-        if (file != null)
-                builder.setContentIntent(getIntent(file));
         mNotificationManager.notify(NOTIFICATION_ID, builder.build());
-    }
-
-    private PendingIntent getIntent(File file) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.fromFile(file));
-        Intent chooserIntent = Intent.createChooser(intent, "Choose an application to open");
-        context.startActivity(chooserIntent);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        return PendingIntent.getActivity(context, 0, intent, 0);
     }
 }

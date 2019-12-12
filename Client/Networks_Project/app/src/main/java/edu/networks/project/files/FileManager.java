@@ -39,13 +39,15 @@ public class FileManager {
         FileUtils.copyFile(file, getFile(name));
     }
 
+    public File createFile(String name) throws IOException {
+        File file = getFile(name);
+        file.createNewFile();
+        return file;
+    }
+
     public void removeFile(String name) {
         File file = getFile(name);
         assert !file.exists() || file.delete();
-    }
-
-    public void renameFile(String oldName, String newName) throws IOException {
-        FileUtils.moveFile(getFile(oldName), getFile(newName));
     }
 
     public byte[] readFile(String name) throws IOException {

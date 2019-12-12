@@ -2,14 +2,12 @@ package edu.networks.project.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import edu.networks.project.MySocket;
 import edu.networks.project.R;
-import edu.networks.project.files.FileManager;
 
 public class FirstActivity extends AppCompatActivity {
 
@@ -18,15 +16,6 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
-
-        FileManager fileManager = new FileManager(getApplicationContext());
-        try {
-            fileManager.writeFile("testfile.html", "<html><head></head><body>test</body></html>" .getBytes());
-            Log.e("SOCKETS", "successful write");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("SOCKETS", "failed write " + e.getMessage());
-        }
     }
 
     public void submit(View view) {
