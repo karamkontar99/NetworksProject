@@ -1,7 +1,6 @@
-package services;
+package main.services;
 
 import main.messages.MessageInterface;
-import main.services.Service;
 
 public class FileDownloadService implements Service {
 
