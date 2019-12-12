@@ -3,7 +3,9 @@ package main.files;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class FileManager {
@@ -29,6 +31,14 @@ public class FileManager {
         if (!file.exists())
             throw new FileNotFoundException();
         return file;
+    }
+
+    public List<File> getAllFiles() {
+        List<File> files = new ArrayList<>();
+        File[] dirFiles = dir.listFiles();
+        if (dirFiles != null)
+            files = Arrays.asList(dirFiles);
+        return files;
     }
 
     private String getPath(String name) {

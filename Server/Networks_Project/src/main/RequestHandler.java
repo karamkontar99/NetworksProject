@@ -8,9 +8,6 @@ import services.ClientServerDownload;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Date;
-
-import static main.messages.EMsg.EExistRequest;
 
 public class RequestHandler extends Thread {
     private final LoginService loginService;
@@ -36,20 +33,29 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             MessageInterface msg = client.readMessage();
-            MessageInterface response;
+            MessageInterface response = null;
 
             switch (msg.getEMsg()) {
                 case ELoginRequest:
                     response = loginService.execute((LoginRequest) msg);
-                    client.sendMessage(response);
                     break;
                 case ERegistrationRequest:
+                    response = RegistrationService.execute((RegistrationRequest) msg);
                     break;
                 case EFileUploadRequest:
+                    response = FileUploadService.execute((FileUploadRequest) msg);
                     break;
                 case EExistRequest:
                     break;
+                case EFileListRequest:
+                    response = loginService.execute((LoginRequest) msg);
+                    break;
+                case EFileDownloadRequest:
+                    response = FileDownloadService.execute((FileDownloadRequest) msg);
+                    break;
             }
+            client.sendMessage(response);
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

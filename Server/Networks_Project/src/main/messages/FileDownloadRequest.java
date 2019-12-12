@@ -4,9 +4,14 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-public class FileDownloadRequest {
+public class FileDownloadRequest implements MessageInterface {
 
     public String fileName;
+
+    @Override
+    public EMsg getEMsg() {
+        return EMsg.EFileDownloadRequest;
+    }
 
     public void parseFromByteArray(byte[] bytes) throws Exception {
 
