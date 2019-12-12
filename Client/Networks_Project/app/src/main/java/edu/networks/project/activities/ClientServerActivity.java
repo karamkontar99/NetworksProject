@@ -2,12 +2,17 @@ package edu.networks.project.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,10 +27,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import edu.networks.project.DocumentAdapter;
 import edu.networks.project.R;
 import edu.networks.project.files.FileManager;
+import edu.networks.project.messages.FileDownloadRequest;
+import edu.networks.project.messages.FileDownloadResponse;
+import edu.networks.project.messages.FileListRequest;
+import edu.networks.project.messages.FileListResponse;
 import edu.networks.project.messages.FileUploadRequest;
 import edu.networks.project.messages.FileUploadResponse;
 import edu.networks.project.models.Document;
 import edu.networks.project.notification.FileProgressNotification;
+import edu.networks.project.services.FileDownloadService;
+import edu.networks.project.services.FileListService;
 import edu.networks.project.services.FileUploadService;
 
 public class ClientServerActivity extends AppCompatActivity {
@@ -65,6 +76,32 @@ public class ClientServerActivity extends AppCompatActivity {
             startActivityForResult(intent, CHOOSE_FILE_REQUEST_CODE);
         });
 
+        new LoadDocuments().execute();
+    }
+
+    private class LoadDocuments extends AsyncTask<FileListRequest, Void, FileListResponse> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+            progressBar.requestFocus();
+        }
+
+        @Override
+        protected FileListResponse doInBackground(FileListRequest... requests) {
+            FileListRequest request = requests[0];
+            FileListResponse response = FileListService.execute(request);
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(FileListResponse fileListResponse) {
+            super.onPostExecute(fileListResponse);
+            progressBar.setVisibility(View.GONE);
+            List<Document> documents = new ArrayList<>();
+            adapter.setDocuments(documents);
+        }
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -82,8 +119,21 @@ public class ClientServerActivity extends AppCompatActivity {
             builder.setView(input);
 
             builder.setPositiveButton("OK", (dialog, i) -> {
-                String fileName = input.getText().toString();
-
+                try {
+                    String fileName = input.getText().toString();
+                    if (fileName.isEmpty()) {
+                        input.setError("cannot be empty");
+                        return;
+                    }
+                    FileProgressNotification notification = new FileProgressNotification(getApplicationContext(), fileName, false);
+                    FileUploadRequest request = new FileUploadRequest();
+                    request.fileName = fileName;
+                    request.fileSize = (int) file.length();
+                    request.data = FileUtils.readFileToByteArray(file);
+                    new FileUploadThread(request, notification);
+                } catch (Exception e) {
+                    Snackbar.make(progressBar, "an error occured", Snackbar.LENGTH_LONG).show();
+                }
                 dialog.dismiss();
             });
 
@@ -115,10 +165,42 @@ public class ClientServerActivity extends AppCompatActivity {
                 notification.failNotification();
         }
     }
+    private class FileDownloadThread extends Thread {
+        private final FileDownloadRequest request;
+        private final FileProgressNotification notification;
+
+        FileDownloadThread(FileDownloadRequest request, FileProgressNotification notification) {
+            this.request = request;
+            this.notification = notification;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+
+            FileDownloadResponse response = FileDownloadService.execute(request, notification::updateNotification);
+            if (response.status == 1)
+                notification.finishNotification(null);
+            else
+                notification.failNotification();
+        }
+    }
 
     private void setupAdapter() {
         adapter.setOnDocumentClickListener(((document, index) -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Download File");
 
+            builder.setPositiveButton("OK", (dialog, i) -> {
+
+                dialog.dismiss();
+            });
+
+            builder.setNegativeButton("Cancel", (dialog, i) -> {
+                dialog.dismiss();
+            });
+
+            builder.show();
         }));
     }
 

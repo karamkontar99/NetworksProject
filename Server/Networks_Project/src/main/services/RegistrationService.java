@@ -24,15 +24,13 @@ public class RegistrationService implements Service<RegistrationRequest, Registr
 
         response = new RegistrationResponse();
         if (!userRepository.uniqueUsername(request.username)) {
-
-            //response.error = "username taken";
             response.status = 0;
         }
         else {
             User user = new User(request.name, request.address, request.email, request.username, request.password);
             userRepository.insert(user);
+            logger.log(Level.INFO, userRepository.findAll().toString());
             response.status = 1;
-            //response = mapper.map(user, RegistrationResponse.class);
         }
         return response;
     }

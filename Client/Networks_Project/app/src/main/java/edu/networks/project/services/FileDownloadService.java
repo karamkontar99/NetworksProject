@@ -3,18 +3,18 @@ package edu.networks.project.services;
 import android.util.Log;
 
 import edu.networks.project.MySocket;
-import edu.networks.project.messages.FileUploadRequest;
-import edu.networks.project.messages.FileUploadResponse;
+import edu.networks.project.messages.FileDownloadRequest;
+import edu.networks.project.messages.FileDownloadResponse;
 
-public class DownloadService {
+public class FileDownloadService {
 
-    public static FileUploadResponse execute(FileUploadRequest request, MySocket.OnProgressUpdateListener listener) {
-        FileUploadResponse response = new FileUploadResponse();
+    public static FileDownloadResponse execute(FileDownloadRequest request, MySocket.OnProgressUpdateListener listener) {
+        FileDownloadResponse response = new FileDownloadResponse();
         MySocket socket;
         try {
             socket = new MySocket(listener);
             socket.sendMessage(request);
-            response = (FileUploadResponse) socket.readMessage();
+            response = (FileDownloadResponse) socket.readMessage();
             Log.e("SOCKETS", "status " + response.status);
             socket.close();
         } catch (Exception e) {

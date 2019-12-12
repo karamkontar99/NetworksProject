@@ -8,8 +8,13 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client {
+    private final Logger logger = Logger.getLogger(getClass().getSimpleName());
+
     private final Socket clientSocket;
     private final DataInputStream is;
     private final DataOutputStream os;
@@ -81,6 +86,8 @@ public class Client {
                 throw new Exception("Unknown EMsg");
         }
 
+        logger.log(Level.INFO, "received data " + Arrays.toString(data));
+
         message.parseFromByteArray(data);
         return message;
     }
@@ -94,6 +101,9 @@ public class Client {
         System.arraycopy(messageBytes, 0, payload, 8, messageBytes.length);
 
         os.write(payload);
+
+        logger.log(Level.INFO, "sent paylod " + Arrays.toString(payload));
+
         os.flush();
     }
 

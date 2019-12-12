@@ -104,8 +104,7 @@ public class MySocket {
         ByteBuffer.wrap(payload, 4, 4).putInt(message.getEMsg().getValue());
         System.arraycopy(messageBytes, 0, payload, 8, messageBytes.length);
 
-        os.write(payload);
-        os.flush();
+        blockingWrite(payload);
     }
 
     public byte[] blockingRead(int size) throws Exception {
@@ -131,10 +130,10 @@ public class MySocket {
         while (written < size) {
             os.write(data, written, Math.min(4096, size - written));
             written += Math.min(4096, size - written);
+            os.flush();
             if (listener != null)
                 listener.onProgressUpdate(written, size);
         }
-        os.flush();
     }
 
     

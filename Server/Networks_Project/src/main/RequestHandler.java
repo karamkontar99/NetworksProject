@@ -32,7 +32,7 @@ public class RequestHandler extends Thread {
     public void run() {
         try {
             MessageInterface msg = client.readMessage();
-            MessageInterface response;
+            MessageInterface response = null;
 
             switch (msg.getEMsg()) {
                 case ELoginRequest:
@@ -47,6 +47,8 @@ public class RequestHandler extends Thread {
                 case EExistRequest:
                     break;
             }
+
+            client.sendMessage(response);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
